@@ -28,6 +28,7 @@ Plug 'benmills/vimux'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'lumiliet/vim-twig'
 " editing
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -89,11 +90,11 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
 " vim-test mappings
-nnoremap <silent> <Leader>t :TestFile<CR>
-nnoremap <silent> <Leader>s :TestNearest<CR>
-nnoremap <silent> <Leader>l :TestLast<CR>
-nnoremap <silent> <Leader>a :TestSuite<CR>
-nnoremap <silent> <Leader>gt :TestVisit<CR>
+" nnoremap <silent> <Leader>t :TestFile<CR>
+" nnoremap <silent> <Leader>s :TestNearest<CR>
+" nnoremap <silent> <Leader>l :TestLast<CR>
+" nnoremap <silent> <Leader>a :TestSuite<CR>
+" nnoremap <silent> <Leader>gt :TestVisit<CR>
 
 " quicker window movement
 " nnoremap <C-j> <C-w>j
@@ -104,19 +105,6 @@ nnoremap <silent> <Leader>gt :TestVisit<CR>
 " move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-
-" airline tabs
-nnoremap <Leader>1 <Plug>AirlineSelectTab1
-nnoremap <Leader>2 <Plug>AirlineSelectTab2
-nnoremap <Leader>3 <Plug>AirlineSelectTab3
-nnoremap <Leader>4 <Plug>AirlineSelectTab4
-nnoremap <Leader>5 <Plug>AirlineSelectTab5
-nnoremap <Leader>6 <Plug>AirlineSelectTab6
-nnoremap <Leader>7 <Plug>AirlineSelectTab7
-nnoremap <Leader>8 <Plug>AirlineSelectTab8
-nnoremap <Leader>9 <Plug>AirlineSelectTab9
-nnoremap <Leader>- <Plug>AirlineSelectPrevTab
-nnoremap <Leader>+ <Plug>AirlineSelectNextTab
 
 " external commands
 map <Leader>vp :VimuxPromptCommand<CR>
@@ -314,7 +302,7 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
     autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-    autocmd FileType html,css,scss,twig EmmetInstall
+    autocmd FileType html,css,scss EmmetInstall
   augroup END
 
   augroup FTOptions
@@ -373,7 +361,14 @@ hi ALEWarningSign cterm=underline ctermfg=yellow
 
 " Emmet
 let g:user_emmet_install_global=0
+let g:user_emmet_mode='inv'
 let g:user_emmet_leader_key='<C-Z>'
+let g:user_emmet_settings={
+\   'twig': {
+\     'extends': 'html',
+\   },
+\ }
+
 
 " Vimux
 let g:VimuxHeight="20"

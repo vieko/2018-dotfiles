@@ -1,6 +1,9 @@
 # dotfiles
 .extra
 .vim/bundle/
+.vim/swaps/
+.vim/backups/
+.vim/undo/
 
 # Compiled Python files
 *.pyc
@@ -11,6 +14,7 @@ _site
 .ruby-version
 
 # Numerous always-ignore extensions
+.netrwhist
 *.diff
 *.err
 *.log
