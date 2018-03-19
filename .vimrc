@@ -362,6 +362,8 @@ let g:netra_liststyle=3
 " CtrlP
 let g:ctrlp_user_command='rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching=0
+let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_witch_buffer='et'
 
 " ALE
 hi ALEError cterm=underline ctermfg=red
@@ -378,7 +380,7 @@ let g:VimuxHeight="20"
 let g:VimuxOrientation="h"
 
 " Solarized
-let g:solarized_contrast='low'
+let g:solarized_contrast='high'
 let g:solarized_visibility='normal'
 
 " Airline
