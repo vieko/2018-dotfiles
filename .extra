@@ -1,0 +1,10 @@
+# Git Credentials
+GIT_AUTHOR_NAME="Vieko Franetovic"
+GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+git config --global user.name "$GIT_AUTHOR_NAME"
+GIT_AUTHOR_EMAIL="vieko.franetovic@gmail.com"
+GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+git config --global user.email "$GIT_AUTHOR_EMAIL"
+
+# github token
+export CHANGELOG_GITHUB_TOKEN="65c834fd9b0d636592db7ce11d1b2e9b622b95cc"

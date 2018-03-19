@@ -1,0 +1,23 @@
+# Homebrew: prevent errors with custom extension compiling
+export PATH="/usr/local/bin:$PATH"
+
+# PHP: load Homebrew PHP before OSX PHP
+export PATH="/usr/local/sbin:$PATH"
+
+# Homebrew: coreutils
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+# Yarn: Fixes Global
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+
+# Composer
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+# Python 
+export PATH="$PATH:$HOME/library/python/3.6/bin"
+
+# Node
+export NODE_PATH="/usr/local/lib/node_modules"
+
+# rbenv fix
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
