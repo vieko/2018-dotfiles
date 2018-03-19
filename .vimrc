@@ -20,7 +20,7 @@ call plug#begin('~/.vim/bundle')
 " workflows
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'janko-m/vim-test'
-Plug 'tpope/scriptease'
+Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-unimpaired'
 Plug 'benmills/vimux'
@@ -43,7 +43,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'vim-ruby/vim-ruby'
 " version control
-Plug 'airblade/vim-gutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " helpers
@@ -60,7 +60,7 @@ call plug#end()
 " Section: Mappings
 " -----------------
 
-let mapleader = "<Space>"
+let mapleader = " "
 nnoremap - :
 inoremap jk <Esc>                         " better escape key
 nnoremap <Leader>w :w!<CR>                " fast save
@@ -70,7 +70,7 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " change pwd to current file's
 inoremap <C-U> <C-G>u<C-U>                " prevent accidental undo in insert mode
 
 " remove trailing whitespaces
-nnoremap <leader><space> :call StripWhitespace()<CR>
+nnoremap <leader>ss :call StripWhitespace()<CR>
 
 " tab completion
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
@@ -96,10 +96,10 @@ nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
 
 " quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
 
 " move between linting errors
 nnoremap ]r :ALENextWrap<CR>
@@ -128,16 +128,18 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 set autoindent
 set autoread          " autoload file changes
 set autowrite         " automatically :write before running commands
-set backspace=indent,eol,start  
+set backspace=indent,eol,start
 if exists('+breakindent')
   set  breakindent showbreak=\ +
 endif
+" set binary
 set cmdheight=2       " command bar height
 setglobal commentstring=#\ %s
 set complete-=i
 set confirm           " prompt to save when command fails
 set dictionary+=/usr/share/dict/words
 set display+=lastline
+set encoding=utf8 nobomb
 if has("eval")
   let &fileencodings = substitute(&fileencodings,"latin1","cp1252","")
 endif
@@ -146,26 +148,28 @@ set foldmethod=marker
 set foldopen+=jump
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
-if has("eval")
-  let &highlight = substitute(&highlight,'NonText','SpecialKey','g')
-endif
+" if has("eval")
+  " let &highlight = substitute(&highlight,'NonText','SpecialKey','g')
+" endif
 set history=50
 set ignorecase        " ignore case when searching
 set incsearch         " do incremental searching
 set laststatus=2      " always display the status bar
 set lazyredraw
 set linebreak
-if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
-  let &listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
-  let &fillchars = "vert:\u259a,fold:\u00b7"
-else
-  set listchars=tab:»,extends:>,precedes:<,trail:·,eol:¬,nbsp:_,space:·
-endif
+" if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
+  " let &listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+  " let &fillchars = "vert:\u259a,fold:\u00b7"
+" else
+  " set list listchars=tab:»·,extends:>,precedes:<,trail:·,eol:¬,nbsp:_,space:·
+" endif
+set list listchars=tab:»·,extends:>,precedes:<,trail:·,eol:¬,nbsp:_,space:·
 if exists('+macmeta')
   set macmeta
 endif
 set mouse=nvi
 set mousemodel=popup
+" set noeol
 set noerrorbells
 set nojoinspaces      " user one space (not two) after punctuation
 set pastetoggle=<F2>
@@ -215,12 +219,14 @@ set shiftwidth=2
 set shiftround
 set expandtab
 
-set cursorline
+" set cursorline
+set nocursorline
 
 set textwidth=100
 set colorcolumn=+1
 
-set number relativenumber
+" set number relativenumber
+set number
 set numberwidth=5
 
 set splitbelow
@@ -235,13 +241,10 @@ let g:html_indent_tags = 'li|p'
 " Sections: Visuals
 " -----------------
 
-" switch syntax highlighting on when the terminal has colors
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-  set t_Co=256
-  set background=dark
-  colorscheme solarized
-endif
+syntax on
+set t_Co=256
+set background=dark
+colorscheme solarized
 
 " TODO: replace with vim-matchup
 " load matchit.vim but only if the user hasn't installed a newer version
@@ -275,25 +278,25 @@ hi NonText cterm=NONE ctermfg=0 ctermbg=NONE
 if has("autocmd")
   filetype plugin indent on
 
-  augroup Misc 
+  augroup Misc
     autocmd!
     " automatic number toggle
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
+    " autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    " autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
 
     " when editing a file, always jump to the last know cursor position
     " don't do it for commit messages, when the position is invalid, or when
     " inside an event handler (happens when dropping a file on gvim)
     autocmd BufReadPost *
-      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"")
-      \ exe "normal g '\"" |
+      \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
       \ endif
   augroup END
 
   augroup Linting
     autocmd!
     " ALE events
-    if g:has_sync
+    if g:has_async
       set updatetime=1000
       let g:ale_lint_on_text_changed = 0
       autocmd CursorHold * call ale#Lint()
@@ -310,7 +313,7 @@ if has("autocmd")
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,NEWS,TODO if &ft == ""|set ft=text|endif
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
-    autocmd BufRead,BufNewFile * .{jscs,jshint,eslint}rc set filetype=json
+    autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
     autocmd FileType html,css,scss,twig EmmetInstall
   augroup END
 
@@ -374,12 +377,14 @@ let g:user_emmet_leader_key='<C-Z>'
 let g:VimuxHeight="20"
 let g:VimuxOrientation="h"
 
+" Solarized
+let g:solarized_contrast='low'
+let g:solarized_visibility='normal'
+
 " Airline
 let g:airline_powerline_fonts=1
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
-let g:solarized_contrast='low'
-let g:solarized_visibility='normal'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0

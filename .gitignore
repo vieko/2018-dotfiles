@@ -1,5 +1,6 @@
 # dotfiles
 .extra
+.vim/bundle/
 
 # Compiled Python files
 *.pyc
@@ -52,7 +53,7 @@ validation-status.json
 bower_components
 node_modules
 
-# Gambitious fields to ignore
+# Good Shepherd fields to ignore
 config/initializers/carrierwave.rb
 app/uploaders/application_uploader.rb
 vendors/rich_cms
