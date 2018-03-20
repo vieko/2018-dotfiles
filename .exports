@@ -1,4 +1,5 @@
 # use vim as default editor
+export EDITOR='vim';
 export VISUAL='vim';
 
 # vim-related variables

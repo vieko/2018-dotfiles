@@ -1,0 +1,10 @@
+session_name: Summoning Demons
+windows:
+  - window_name: Good Shepherd
+    layout: main-vertical
+    shell_command_before:
+      - cd ~/Documents/Development/goodshepherd
+    panes:
+      - vim
+      - la
+      - echo 'start project here'

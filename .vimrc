@@ -21,6 +21,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nixprime/cpsm', { 'do': 'env PY3=ON ./install.sh' }
 " Plug 'tacahiroy/ctrlp-funky'
+Plug 'andymass/vim-matchup'
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-projectionist'
@@ -241,11 +242,12 @@ set t_Co=256
 set background=dark
 colorscheme base16-default-dark
 
-" TODO: replace with vim-matchup
+" let g:loaded_matchit=1
+
 " load matchit.vim but only if the user hasn't installed a newer version
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
+" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  " runtime! macros/matchit.vim
+" endif
 
 " when the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes
