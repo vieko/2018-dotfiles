@@ -19,6 +19,8 @@ call plug#begin('~/.vim/bundle')
 
 " workflows
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nixprime/cpsm', { 'do': 'env PY3=ON ./install.sh' }
+" Plug 'tacahiroy/ctrlp-funky'
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-projectionist'
@@ -71,8 +73,11 @@ nnoremap <Leader>t :tabnew<CR>            " create new tab
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " change pwd to current file's
 inoremap <C-U> <C-G>u<C-U>                " prevent accidental undo in insert mode
 
+" simple find in the current buffer
+" nnoremap <Leader>f :CtrlPFunky<CR>
+
 " remove trailing whitespaces
-nnoremap <leader>ss :call StripWhitespace()<CR>
+nnoremap <Leader>ss :call StripWhitespace()<CR>
 
 " tab completion
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
@@ -354,6 +359,8 @@ let g:ctrlp_user_command='rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching=0
 let g:ctrlp_working_path_mode='ra'
 let g:ctrlp_witch_buffer='et'
+let g:ctrlp_match_func={'match':'cpsm#CtrlMatch'}
+" let g:ctrlp_funky_syntax_highlight=1
 
 " ALE
 hi ALEError cterm=underline ctermfg=red
@@ -385,7 +392,7 @@ let g:solarized_visibility='normal'
 
 " Airline
 let g:airline_powerline_fonts=1
-" let g:airline_theme='solarized'
+let g:airline_theme='base16_default'
 " let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
