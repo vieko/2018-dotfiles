@@ -25,18 +25,19 @@ Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-unimpaired'
 Plug 'benmills/vimux'
 " syntax / themes
+Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'lumiliet/vim-twig'
+Plug 'mattn/emmet-vim'
+Plug 'sheerun/vim-polyglot'
+" Plug 'pangloss/vim-javascript'
+" Plug 'lumiliet/vim-twig'
+" Plug 'posva/vim-vue'
 " editing
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-" html / js / css / etc
-Plug 'mattn/emmet-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'posva/vim-vue'
 " ruby / rails
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
@@ -230,9 +231,10 @@ let g:html_indent_tags = 'li|p'
 " -----------------
 
 syntax on
+let base16colorspace=256
 set t_Co=256
 set background=dark
-colorscheme solarized
+colorscheme base16-default-dark
 
 " TODO: replace with vim-matchup
 " load matchit.vim but only if the user hasn't installed a newer version
@@ -257,8 +259,8 @@ hi link jsObjectKey         Label
 hi link jsObjectValue       Normal
 
 " special charaters
-hi SpecialKey cterm=NONE ctermfg=0 ctermbg=NONE
-hi NonText cterm=NONE ctermfg=0 ctermbg=NONE
+" hi SpecialKey cterm=NONE ctermfg=0 ctermbg=NONE
+" hi NonText cterm=NONE ctermfg=0 ctermbg=NONE
 
 " Section: AutoCommands
 " ---------------------
@@ -302,7 +304,7 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.md set filetype=markdown
     autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
     autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-    autocmd FileType html,css,scss EmmetInstall
+    autocmd FileType html,css,scss,twig EmmetInstall
   augroup END
 
   augroup FTOptions
@@ -361,7 +363,7 @@ hi ALEWarningSign cterm=underline ctermfg=yellow
 
 " Emmet
 let g:user_emmet_install_global=0
-let g:user_emmet_mode='inv'
+" let g:user_emmet_mode='inv'
 let g:user_emmet_leader_key='<C-Z>'
 let g:user_emmet_settings={
 \   'twig': {
@@ -369,6 +371,9 @@ let g:user_emmet_settings={
 \   },
 \ }
 
+" tmuxline
+let g:tmuxline_preset='powerline'
+let g:tmuxline_theme='airline'
 
 " Vimux
 let g:VimuxHeight="20"
@@ -380,8 +385,8 @@ let g:solarized_visibility='normal'
 
 " Airline
 let g:airline_powerline_fonts=1
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+" let g:airline_theme='solarized'
+" let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0
@@ -389,6 +394,7 @@ let g:airline#extensions#tabline#tab_nr_type = 2
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tmuxline#enabled=0
 
 " vim-vue
-let g:vue_disable_pre_processors=1
+" let g:vue_disable_pre_processors=1
