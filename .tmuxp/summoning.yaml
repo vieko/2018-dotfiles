@@ -1,10 +1,12 @@
 session_name: Summoning Demons
+start_directory: '~/Documents/Development/goodshepherd/goodshepherd.games'
 windows:
   - window_name: Good Shepherd
-    layout: main-vertical
-    shell_command_before:
-      - cd ~/Documents/Development/goodshepherd
+    focus: true
+    layout: aabe,254x62,0,0{185x62,0,0,167,68x62,186,0[68x30,186,0,168,68x31,186,31,169]}
     panes:
-      - vim
-      - la
-      - echo 'start project here'
+      - shell_command:
+        - vim
+        focus: true 
+      - blank
+      - blank 

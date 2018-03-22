@@ -477,6 +477,8 @@ sudo mdutil -E / > /dev/null
 ###############################################################################
 # Terminal & iTerm 2                                                          #
 ###############################################################################
+# disable key repeat for iTerm2
+defaults write com.googlecode.iterm2 ApplePressAndHoldKey --bool false
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4

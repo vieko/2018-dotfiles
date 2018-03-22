@@ -18,44 +18,38 @@ let g:has_async = v:version >= 800 || has('nvim')
 call plug#begin('~/.vim/bundle')
 
 " workflows
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'nixprime/cpsm', { 'do': 'env PY3=ON ./install.sh' }
-" Plug 'tacahiroy/ctrlp-funky'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'andymass/vim-matchup'
-Plug 'janko-m/vim-test'
-Plug 'tpope/vim-scriptease'
-Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-unimpaired'
-Plug 'benmills/vimux'
-" syntax / themes
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-scriptease', { 'on': [] }
+Plug 'tpope/vim-projectionist', { 'on': [] }
+" themes
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mattn/emmet-vim'
+" interface
+Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+" syntax
 Plug 'sheerun/vim-polyglot'
-" Plug 'pangloss/vim-javascript'
-" Plug 'lumiliet/vim-twig'
-" Plug 'posva/vim-vue'
 " editing
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 " ruby / rails
-Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-bundler', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rails', { 'on': [] }
 Plug 'tpope/vim-rake'
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 " version control
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
-" helpers
-Plug 'tpope/vim-eunuch'
-Plug 'edkolev/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
-
+" linting
 if g:has_async
   Plug 'w0rp/ale'
 endif
@@ -66,13 +60,14 @@ call plug#end()
 " -----------------
 
 let mapleader = " "
-nnoremap - :
+" nnoremap - :
 inoremap jk <Esc>                         " better escape key
 nnoremap <Leader>w :w!<CR>                " fast save
 nnoremap <silent> vv <C-w>v               " split vertically
 nnoremap <Leader>t :tabnew<CR>            " create new tab
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " change pwd to current file's
 inoremap <C-U> <C-G>u<C-U>                " prevent accidental undo in insert mode
+nnoremap <C-p> :<C-u>FZF<CR>              " trigger fuzzy search
 
 " simple find in the current buffer
 " nnoremap <Leader>f :CtrlPFunky<CR>
@@ -96,26 +91,9 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" vim-test mappings
-" nnoremap <silent> <Leader>t :TestFile<CR>
-" nnoremap <silent> <Leader>s :TestNearest<CR>
-" nnoremap <silent> <Leader>l :TestLast<CR>
-" nnoremap <silent> <Leader>a :TestSuite<CR>
-" nnoremap <silent> <Leader>gt :TestVisit<CR>
-
-" quicker window movement
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-
 " move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-
-" external commands
-map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>vl :VimuxRunLastCommand<CR>
 
 " Section: Options
 " ----------------
@@ -147,6 +125,7 @@ set grepprg=rg\ --color=never
   " let &highlight = substitute(&highlight,'NonText','SpecialKey','g')
 " endif
 set history=50
+set hlsearch
 set ignorecase        " ignore case when searching
 set incsearch         " do incremental searching
 set laststatus=2      " always display the status bar
@@ -173,7 +152,7 @@ set ruler             " show the cursor position at all times
 set scrolloff=1       " always show at least one line above / below cursor
 set shortmess=atI     " hide intro message
 set showcmd           " display incomplete commands
-set showmatch
+" set showmatch
 set sidescrolloff=5
 set smartcase
 set smarttab
@@ -242,8 +221,6 @@ set t_Co=256
 set background=dark
 colorscheme base16-default-dark
 
-" let g:loaded_matchit=1
-
 " load matchit.vim but only if the user hasn't installed a newer version
 " if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   " runtime! macros/matchit.vim
@@ -255,15 +232,8 @@ let g:is_posix = 1
 
 " Sections: Theme Tweaks
 " ----------------------
-
-" javascript
-hi link jsModuleKeyword     Identifier
-hi link jsVariableDef       Identifier
-hi link jsFuncArgs          Identifier
-hi link jsFuncCall          Function
-hi link jsObjectProp        Identifier
-hi link jsObjectKey         Label
-hi link jsObjectValue       Normal
+" highlight Visual guifg=white guibg=black ctermfg=white ctermbg=black
+highlight MatchParen ctermbg=235
 
 " special charaters
 " hi SpecialKey cterm=NONE ctermfg=0 ctermbg=NONE
@@ -352,17 +322,12 @@ endfunction
 " Section: Plugin Configuration
 " -----------------------------
 
+" matchup
+" let g:matchup_enabled = 0
+
 " netrw
 let g:netrw_banner=0
 let g:netra_liststyle=3
-
-" CtrlP
-let g:ctrlp_user_command='rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching=0
-let g:ctrlp_working_path_mode='ra'
-let g:ctrlp_witch_buffer='et'
-let g:ctrlp_match_func={'match':'cpsm#CtrlMatch'}
-" let g:ctrlp_funky_syntax_highlight=1
 
 " ALE
 hi ALEError cterm=underline ctermfg=red
@@ -372,7 +337,6 @@ hi ALEWarningSign cterm=underline ctermfg=yellow
 
 " Emmet
 let g:user_emmet_install_global=0
-" let g:user_emmet_mode='inv'
 let g:user_emmet_leader_key='<C-Z>'
 let g:user_emmet_settings={
 \   'twig': {
@@ -384,13 +348,9 @@ let g:user_emmet_settings={
 let g:tmuxline_preset='powerline'
 let g:tmuxline_theme='airline'
 
-" Vimux
-let g:VimuxHeight="20"
-let g:VimuxOrientation="h"
-
 " Solarized
-let g:solarized_contrast='high'
-let g:solarized_visibility='normal'
+" let g:solarized_contrast='high'
+" let g:solarized_visibility='normal'
 
 " Airline
 let g:airline_powerline_fonts=1
@@ -404,6 +364,3 @@ let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tmuxline#enabled=0
-
-" vim-vue
-" let g:vue_disable_pre_processors=1
