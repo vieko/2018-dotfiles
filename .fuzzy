@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
 # Author: Chris Kempson (http://chriskempson.com)
 gen_fzf_default_opts() {
 local color00='#181818'
