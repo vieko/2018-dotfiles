@@ -36,6 +36,7 @@ alias editbash="vim  ~/.bash_profile"
 alias editvim="vim ~/.vimrc"
 alias editmux="vim ~/.tmux.conf"
 alias editline="vim ~/.tmuxline.conf"
+alias editfuzzy="vim ~/.fuzzy"
 alias resource="source ~/.bash_profile && echo "Done!""
 
 # Detect which `ls` flavor is in use

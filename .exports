@@ -36,5 +36,3 @@ export MANPAGER='less -X';
 # Always enable colored `grep` output.
 export GREP_OPTIONS='--color=auto';
 
-# use ripgrep with vim
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'

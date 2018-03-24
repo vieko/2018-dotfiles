@@ -29,10 +29,12 @@ Plug 'tpope/vim-projectionist', { 'on': [] }
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
 " interface
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'kshenoy/vim-signature'
 " syntax
 Plug 'sheerun/vim-polyglot'
 " editing
@@ -53,6 +55,8 @@ Plug 'tpope/vim-rhubarb'
 if g:has_async
   Plug 'w0rp/ale'
 endif
+" helpers
+" Plug 'tpope/eunuch'
 
 call plug#end()
 
@@ -60,20 +64,48 @@ call plug#end()
 " -----------------
 
 let mapleader = " "
-" nnoremap - :
-inoremap jk <Esc>                         " better escape key
-nnoremap <Leader>w :w!<CR>                " fast save
-nnoremap <silent> vv <C-w>v               " split vertically
-nnoremap <Leader>t :tabnew<CR>            " create new tab
-nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " change pwd to current file's
-inoremap <C-U> <C-G>u<C-U>                " prevent accidental undo in insert mode
-nnoremap <C-p> :<C-u>FZF<CR>              " trigger fuzzy search
+let maplocalleader = " "
 
-" simple find in the current buffer
-" nnoremap <Leader>f :CtrlPFunky<CR>
+" open new line below and above current line
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
+
+" save
+nnoremap <Leader>w :w!<CR>
+
+" tag
+" nnoremap <C-]> g<C-]>
+" nnoremap g[ :pop<CR>
+
+" better escape
+inoremap jk <Esc>
+xnoremap jk <Esc>
+cnoremap jk <Esc>
+
+" insert mode movement
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+
+" copy text to the end of the line (Y consistend with C and D)
+nnoremap Y y$
+
+" qq to record, q to stop recording, Q to replay
+nnoremap Q @q
+
+" close location list / quickfix
+" nnoremap <Leader>c :cclose<bar>lclose<CR>
+
+nnoremap <silent> vv <C-w>v
+nnoremap <Leader>t :tabnew<CR>
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
+inoremap <C-U> <C-G>u<C-U>
+
+noremap <C-p> :<C-u>FZF<CR>
 
 " remove trailing whitespaces
-nnoremap <Leader>ss :call StripWhitespace()<CR>
+nnoremap <Leader>sw :call StripWhitespace()<CR>
 
 " tab completion
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
@@ -106,6 +138,7 @@ if exists('+breakindent')
   set  breakindent showbreak=\ +
 endif
 " set binary
+set clipboard=unnamed
 set cmdheight=2       " command bar height
 setglobal commentstring=#\ %s
 set complete-=i
@@ -146,12 +179,13 @@ set mousemodel=popup
 " set noeol
 set noerrorbells
 set nojoinspaces      " user one space (not two) after punctuation
+set nostartofline     " keep the cursor on the same column
 set pastetoggle=<F2>
 set printoptions=paper:letter
 set ruler             " show the cursor position at all times
 set scrolloff=1       " always show at least one line above / below cursor
 set shortmess=atI     " hide intro message
-set showcmd           " display incomplete commands
+  set showcmd           " display incomplete commands
 " set showmatch
 set sidescrolloff=5
 set smartcase
@@ -247,6 +281,8 @@ if has("autocmd")
 
   augroup Misc
     autocmd!
+    " close quickfix / location list on selection
+    autocmd FileType qf nmap <buffer> <CR> <CR>:lcl<CR>
     " automatic number toggle
     " autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
     " autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber

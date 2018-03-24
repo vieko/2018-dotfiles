@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
+
+
+# Author: Chris Kempson (http://chriskempson.com)
+gen_fzf_default_opts() {
+local color00='#181818'
+local color01='#282828'
+local color02='#383838'
+local color03='#585858'
+local color04='#b8b8b8'
+local color05='#d8d8d8'
+local color06='#e8e8e8'
+local color07='#f8f8f8'
+local color08='#ab4642'
+local color09='#dc9656'
+local color0A='#f7ca88'
+local color0B='#a1b56c'
+local color0C='#86c1b9'
+local color0D='#7cafc2'
+local color0E='#ba8baf'
+local color0F='#a16946'
+export FZF_DEFAULT_OPTS="
+  --color=bg+:$color01,bg:$color00,spinner:$color0C,hl:$color0D
+  --color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C
+  --color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D
+  --height 40%
+  --border
+"
+}
+gen_fzf_default_opts
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+
+if [ -x ~/.vim/bundle/fzf.vim/bin/preview.rb ]; then
+  export FZF_CTRL_T_OPTS="--preview '~/.vim/bundle/fzf.vim/bin/preview.rb {} | head -200'"
+fi
+
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border
+"
+
+command -v blsd > /dev/null && export FZF_ALT_C_COMMAND='blsd $dir'
+command -v tree > /dev/null && export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# ftags - search ctags
+ftags() {
+  local line
+  [ -e tags ] &&
+  line=$(
+    awk 'BEGIN { FS="\t" } !/^!/ {print toupper($4)"\t"$1"\t"$2"\t"$3}' tags |
+    cut -c1-$COLUMNS | fzf --nth=2 --tiebreak=begin
+  ) && $EDITOR $(cut -f3 <<< "$line") -c "set nocst" \
+                                      -c "silent tag $(cut -f2 <<< "$line")"
+}
+
+# fco - checkout git branch/tag
+fco() {
+  local tags branches target
+  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+  branches=$(
+    git branch --all | grep -v HEAD             |
+    sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+    sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$tags"; echo "$branches") | sed '/^$/d' |
+    fzf-down --no-hscroll --reverse --ansi +m -d "\t" -n 2 -q "$*") || return
+  git checkout $(echo "$target" | awk '{print $2}')
+}
