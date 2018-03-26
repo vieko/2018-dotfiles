@@ -78,10 +78,6 @@ nnoremap <Leader>O O<Esc>
 " save
 nnoremap <Leader>w :w!<CR>
 
-" tag
-" nnoremap <C-]> g<C-]>
-" nnoremap g[ :pop<CR>
-
 " better escape
 inoremap jk <Esc>
 xnoremap jk <Esc>
@@ -103,12 +99,29 @@ nnoremap Y y$
 " qq to record, q to stop recording, Q to replay
 nnoremap Q @q
 
-nnoremap <silent> vv <C-w>v
-nnoremap <Leader>t :tabnew<CR>
-nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
-inoremap <C-U> <C-G>u<C-U>
+" open vertical split with new buffer
+nnoremap <silent> vv :vnew<CR> 
+" open empty buffer
+nnoremap <Leader>t :enew<CR>
+" open empty tab
+nnoremap <Leader>T :tabnew<CR>
 
-noremap <C-p> :<C-u>FZF<CR>
+" close current buffer and move to previous one
+nnoremap <Leader>bq :bd<BAR>bd#<CR>
+" change pwd to current working directory
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
+" switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+
+" trigger fuzzy search
+nnoremap <C-p> :<C-u>FZF<CR>
+" show list of current buffers
+nnoremap <C-b> :Buffers<CR>
+" search loaded buffers
+nnoremap <C-f> :Lines<CR>
+
+" prevent accidental undos under insert mode
+inoremap <C-U> <C-G>u<C-U>
 
 " remove trailing whitespaces
 nnoremap <Leader>sw :call StripWhitespace()<CR>
@@ -119,9 +132,6 @@ inoremap <S-Tab> <C-n>
 
 " clear highlights
 nnoremap <silent> <Leader><CR> :noh<CR>
-
-" switch between the last two files
-nnoremap <Leader><Leader> <C-^>
 
 " this is a great idea!
 nnoremap <Left> :echoe "Use h"<CR>
@@ -169,6 +179,7 @@ set foldmethod=marker
 set foldopen+=jump
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
+set hidden
 set history=50
 set hlsearch
 set ignorecase        " ignore case when searching
@@ -239,8 +250,8 @@ set cursorline
 set textwidth=100
 set colorcolumn=+1
 
-" set number relativenumber
-set number
+set number relativenumber
+" set number
 set numberwidth=5
 
 set splitbelow
@@ -299,8 +310,8 @@ if has("autocmd")
     " close quickfix / location list on selection
     autocmd FileType qf nmap <buffer> <CR> <CR>:lcl<CR>
     " automatic number toggle
-    " autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    " autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
+    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
 
     " when editing a file, always jump to the last know cursor position
     " don't do it for commit messages, when the position is invalid, or when
@@ -402,12 +413,12 @@ let g:user_emmet_settings={
 " Airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_buffers=1
 let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#tab_nr_type = 2
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#tab_nr_type=2
+let g:airline#extensions#tabline#show_tab_nr=1
+let g:airline#extensions#tabline#show_tab_type=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tmuxline#enabled=0
 
