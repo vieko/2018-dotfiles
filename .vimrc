@@ -189,7 +189,7 @@ set nostartofline     " keep the cursor on the same column
 set pastetoggle=<F2>
 set printoptions=paper:letter
 set ruler             " show the cursor position at all times
-set scrolloff=1       " always show at least one line above / below cursor
+set scrolloff=2       " always show at least one line above / below cursor
 set shortmess=atI     " hide intro message
   set showcmd           " display incomplete commands
 " set showmatch
@@ -417,7 +417,7 @@ let g:tmuxline_preset='powerline'
 
 let g:tmuxline_theme = {
   \ 'a'    : [ '#282828', '#a89984', 'bold' ],
-  \ 'b'    : [ '#ffffff', '$ffffff' ],
+  \ 'b'    : [ '#ffffff', '#ffffff' ],
   \ 'c'    : [ '#ffffff', '#ffffff' ],
   \ 'x'    : [ '#ffffff', '#ffffff' ],
   \ 'y'    : [ '#a89984', '#504945' ],
@@ -425,7 +425,6 @@ let g:tmuxline_theme = {
   \ 'win'  : [ '#a89984', '#3c3836' ],
   \ 'cwin' : [ '#a89984', '#504945' ],
   \ 'bg'   : [ '#fbf1c' , '#3c3836' ]}
-
 
 " quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
