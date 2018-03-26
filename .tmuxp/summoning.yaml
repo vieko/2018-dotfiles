@@ -3,7 +3,7 @@ start_directory: '~/Documents/Development/goodshepherd/goodshepherd.games'
 windows:
   - window_name: Good Shepherd
     focus: true
-    layout: aabe,254x62,0,0{185x62,0,0,167,68x62,186,0[68x30,186,0,168,68x31,186,31,169]}
+    layout: 855b,254x53,0,0[254x46,0,0,1,254x6,0,47{127x6,0,47,8,126x6,128,47,9}]
     panes:
       - shell_command:
         - vim
