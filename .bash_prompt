@@ -4,12 +4,13 @@
 # Screenshot: http://i.imgur.com/EkEtphC.png
 # Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
 # iTerm → Profiles → Text → use 13pt Monaco with 1.1 vertical spacing.
+# if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
+#   export TERM='gnome-256color';
+# elif infocmp xterm-256color >/dev/null 2>&1; then
+#   export TERM='xterm-256color';
+# fi;
 
-if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
-  export TERM='gnome-256color';
-elif infocmp xterm-256color >/dev/null 2>&1; then
-  export TERM='xterm-256color';
-fi;
+export TERM='xterm-256color-italic';
 
 prompt_git() {
   local s='';
@@ -70,7 +71,7 @@ if tput setaf 1 &> /dev/null; then
   blue=$(tput setaf 4);
   cyan=$(tput setaf 6);
   green=$(tput setaf 2);
-  orange=$(tput setaf 16);
+  orange=$(tput setaf 9);
   purple=$(tput setaf 5);
   red=$(tput setaf 1);
   violet=$(tput setaf 5);

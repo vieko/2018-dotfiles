@@ -25,6 +25,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-scriptease', { 'on': [] }
 Plug 'tpope/vim-projectionist', { 'on': [] }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'unblevable/quick-scope'
 " themes
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
@@ -35,6 +37,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
+" Plug 'junegunn/rainbow_parentheses.vim'
+" Plug 'nathanaelkane/vim-indent-guides'
 " syntax
 Plug 'sheerun/vim-polyglot'
 " editing
@@ -51,6 +55,7 @@ Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
 " linting
 if g:has_async
   Plug 'w0rp/ale'
@@ -87,15 +92,16 @@ inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
+"
+" Move across wrapped lines like regular lines
+noremap 0 ^
+noremap ^ 0
 
 " copy text to the end of the line (Y consistend with C and D)
 nnoremap Y y$
 
 " qq to record, q to stop recording, Q to replay
 nnoremap Q @q
-
-" close location list / quickfix
-" nnoremap <Leader>c :cclose<bar>lclose<CR>
 
 nnoremap <silent> vv <C-w>v
 nnoremap <Leader>t :tabnew<CR>
@@ -127,6 +133,14 @@ nnoremap <Down> :echoe "Use j"<CR>
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
+" gruvbox overrides for tpope/unimpaired
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+
 " Section: Options
 " ----------------
 
@@ -150,13 +164,11 @@ if has("eval")
   let &fileencodings = substitute(&fileencodings,"latin1","cp1252","")
 endif
 set fileformats=unix,dos,mac
+set fillchars+=vert:│
 set foldmethod=marker
 set foldopen+=jump
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
-" if has("eval")
-  " let &highlight = substitute(&highlight,'NonText','SpecialKey','g')
-" endif
 set history=50
 set hlsearch
 set ignorecase        " ignore case when searching
@@ -164,12 +176,6 @@ set incsearch         " do incremental searching
 set laststatus=2      " always display the status bar
 set lazyredraw
 set linebreak
-" if (&termencoding ==# 'utf-8' || &encoding ==# 'utf-8') && version >= 700
-  " let &listchars = "tab:\u21e5\u00b7,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
-  " let &fillchars = "vert:\u259a,fold:\u00b7"
-" else
-  " set list listchars=tab:»·,extends:>,precedes:<,trail:·,eol:¬,nbsp:_,space:·
-" endif
 set list listchars=tab:»·,extends:>,precedes:<,trail:·,eol:¬,nbsp:_,space:·
 if exists('+macmeta')
   set macmeta
@@ -228,7 +234,7 @@ set shiftround
 set expandtab
 
 " set cursorline
-set nocursorline
+set cursorline
 
 set textwidth=100
 set colorcolumn=+1
@@ -250,10 +256,19 @@ let g:html_indent_tags = 'li|p'
 " -----------------
 
 syntax on
-let base16colorspace=256
-set t_Co=256
+
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+" set t_8f=[[38;2;%lu;%lu;%lum
+" set t_8b=[[48;2;%lu;%lu;%lum
+set termguicolors
+
 set background=dark
-colorscheme base16-default-dark
+
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_invert_selection=0
+colorscheme gruvbox
 
 " load matchit.vim but only if the user hasn't installed a newer version
 " if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
@@ -262,12 +277,12 @@ colorscheme base16-default-dark
 
 " when the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes
-let g:is_posix = 1
+" let g:is_posix = 1
 
 " Sections: Theme Tweaks
 " ----------------------
 " highlight Visual guifg=white guibg=black ctermfg=white ctermbg=black
-highlight MatchParen ctermbg=235
+" highlight MatchParen ctermbg=235
 
 " special charaters
 " hi SpecialKey cterm=NONE ctermfg=0 ctermbg=NONE
@@ -354,7 +369,6 @@ function! StripWhitespace()
   call setreg('/', old_query)
 endfunction
 
-
 " Section: Plugin Configuration
 " -----------------------------
 
@@ -380,18 +394,14 @@ let g:user_emmet_settings={
 \   },
 \ }
 
-" tmuxline
-let g:tmuxline_preset='powerline'
-let g:tmuxline_theme='airline'
-
 " Solarized
 " let g:solarized_contrast='high'
 " let g:solarized_visibility='normal'
+" let g:airline_solarized_bg='dark'
 
 " Airline
+let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16_default'
-" let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0
@@ -400,3 +410,25 @@ let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tmuxline#enabled=0
+
+" tmuxline
+let g:tmuxline_preset='powerline'
+" let g:tmuxline_theme = 'powerline'
+
+let g:tmuxline_theme = {
+  \ 'a'    : [ '#282828', '#a89984', 'bold' ],
+  \ 'b'    : [ '#ffffff', '$ffffff' ],
+  \ 'c'    : [ '#ffffff', '#ffffff' ],
+  \ 'x'    : [ '#ffffff', '#ffffff' ],
+  \ 'y'    : [ '#a89984', '#504945' ],
+  \ 'z'    : [ '#282828', '#a89984', 'bold' ],
+  \ 'win'  : [ '#a89984', '#3c3836' ],
+  \ 'cwin' : [ '#a89984', '#504945' ],
+  \ 'bg'   : [ '#fbf1c' , '#3c3836' ]}
+
+
+" quick-scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" vim-indent-guides
+" let g:indent_guides_enable_on_vim_startup = 1
