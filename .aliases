@@ -122,6 +122,10 @@ alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo 
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
+# Show/hide menubar
+alias hidemenubar="defaults write NSGlobalDomain _HIHideMenuBar -bool true && killall Finder" 
+alias showmenubar="defaults write NSGlobalDomain _HIHideMenuBar -bool false && killall Finder"
+
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"

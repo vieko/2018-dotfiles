@@ -61,7 +61,7 @@ if g:has_async
   Plug 'w0rp/ale'
 endif
 " helpers
-" Plug 'tpope/eunuch'
+" Plug 'tpope/vim-eunuch'
 
 call plug#end()
 
@@ -100,7 +100,7 @@ nnoremap Y y$
 nnoremap Q @q
 
 " open vertical split with new buffer
-nnoremap <silent> vv :vnew<CR> 
+nnoremap <silent> vv :vnew<CR>
 " open empty buffer
 nnoremap <Leader>t :enew<CR>
 " open empty tab
@@ -144,12 +144,12 @@ nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
 " gruvbox overrides for tpope/unimpaired
-nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 " Section: Options
 " ----------------
@@ -390,12 +390,6 @@ endfunction
 let g:netrw_banner=0
 let g:netra_liststyle=3
 
-" ALE
-hi ALEError cterm=underline ctermfg=red
-hi ALEErrorSign cterm=underline ctermfg=red
-hi ALEWarning cterm=underline ctermfg=yellow
-hi ALEWarningSign cterm=underline ctermfg=yellow
-
 " Emmet
 let g:user_emmet_install_global=0
 let g:user_emmet_leader_key='<C-Z>'
@@ -413,14 +407,24 @@ let g:user_emmet_settings={
 " Airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
+" airline-abline
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#show_splits=1
 let g:airline#extensions#tabline#show_buffers=1
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#tab_nr_type=2
+let g:airline#extensions#tabline#alt_sep=0
+let g:airline#extensions#tabline#show_tabs=0
+let g:airline#extensions#tabline#buffer_idx_mode=1
+let g:airline#extensions#tabline#show_close_button=0
+let g:airline#extensions#tabline#tab_nr_type=1
 let g:airline#extensions#tabline#show_tab_nr=1
-let g:airline#extensions#tabline#show_tab_type=1
+let g:airline#extensions#tabline#show_tab_type=0
+let g:airline#extensions#tabline#tabs_label='Tabs' 
+let g:airline#extensions#tabline#buffers_label='buffers'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+" airline-tmuxline
 let g:airline#extensions#tmuxline#enabled=0
+" airline-ale
+let g:airline#extensions#ale#enabled=1
 
 " tmuxline
 let g:tmuxline_preset='powerline'
