@@ -20,13 +20,14 @@ call plug#begin('~/.vim/bundle')
 " workflows
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-scriptease', { 'on': [] }
 Plug 'tpope/vim-projectionist', { 'on': [] }
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
+" Plug 'justinmk/vim-sneak'
+Plug 'rhysd/clever-f.vim'
 " themes
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
@@ -37,8 +38,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
-" Plug 'junegunn/rainbow_parentheses.vim'
-" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Valloric/MatchTagAlways'
+Plug 'tpope/vim-vinegar'
+Plug 'vieko/hardmode'
+Plug 'takac/vim-hardtime'
+" Plug 'andymass/vim-matchup'
 " syntax
 Plug 'sheerun/vim-polyglot'
 " editing
@@ -57,11 +61,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 " linting
-if g:has_async
-  Plug 'w0rp/ale'
-endif
+Plug 'w0rp/ale'
 " helpers
-" Plug 'tpope/vim-eunuch'
+Plug 'rizzatti/dash.vim'
+Plug 'tpope/vim-eunuch'
 
 call plug#end()
 
@@ -70,6 +73,9 @@ call plug#end()
 
 let mapleader = " "
 let maplocalleader = " "
+
+" search for the word under the cursor, considering the current keyword setup for docset  lookup
+nmap <silent><Leader>d <Plug>DashSearch
 
 " open new line below and above current line
 nnoremap <Leader>o o<Esc>
@@ -80,15 +86,14 @@ nnoremap <Leader>w :w!<CR>
 
 " better escape
 inoremap jk <Esc>
-xnoremap jk <Esc>
-cnoremap jk <Esc>
+" inoremap <Esc> <nop>
 
 " insert mode movement
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
-"
+
 " Move across wrapped lines like regular lines
 noremap 0 ^
 noremap ^ 0
@@ -100,11 +105,11 @@ nnoremap Y y$
 nnoremap Q @q
 
 " open vertical split with new buffer
-nnoremap <silent> vv :vnew<CR>
+" nnoremap <silent>vv :vnew<CR>
 " open empty buffer
-nnoremap <Leader>t :enew<CR>
+" nnoremap <Leader>t :enew<CR>
 " open empty tab
-nnoremap <Leader>T :tabnew<CR>
+" nnoremap <Leader>T :tabnew<CR>
 
 " close current buffer and move to previous one
 nnoremap <Leader>bq :bd<BAR>bd#<CR>
@@ -117,7 +122,9 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap <C-p> :<C-u>FZF<CR>
 " show list of current buffers
 nnoremap <C-b> :Buffers<CR>
-" search loaded buffers
+" search content of all files under cwd
+nnoremap <C-g> :Rg<CR>
+" search all open buffers
 nnoremap <C-f> :Lines<CR>
 
 " prevent accidental undos under insert mode
@@ -133,23 +140,36 @@ inoremap <S-Tab> <C-n>
 " clear highlights
 nnoremap <silent> <Leader><CR> :noh<CR>
 
-" this is a great idea!
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+" toggle hardmode
+" nnoremap <leader>h :HardTimeToggle<Esc>:call ToggleHardMode()<CR>
 
 " move between linting errors
-nnoremap ]r :ALENextWrap<CR>
-nnoremap [r :ALEPreviousWrap<CR>
+nmap <silent>[W <Plug>(ale_first)
+nmap <silent>[w <Plug>(ale_previous)
+nmap <silent>]w <Plug>(ale_next)
+nmap <silent>]W <Plug>(ale_last)
 
 " gruvbox overrides for tpope/unimpaired
-" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+
+" airline tabline quick selection
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
+
+" reset clever-f selection 
+nmap <Leader>f <Plug>(clever-f-reset)
 
 " Section: Options
 " ----------------
@@ -179,7 +199,7 @@ set foldmethod=marker
 set foldopen+=jump
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
-set hidden
+set nohidden
 set history=50
 set hlsearch
 set ignorecase        " ignore case when searching
@@ -196,14 +216,15 @@ set mousemodel=popup
 " set noeol
 set noerrorbells
 set nojoinspaces      " user one space (not two) after punctuation
+set novisualbell
 set nostartofline     " keep the cursor on the same column
 set pastetoggle=<F2>
 set printoptions=paper:letter
 set ruler             " show the cursor position at all times
-set scrolloff=2       " always show at least one line above / below cursor
+set scrolloff=3       " always show at least one line above / below cursor
 set shortmess=atI     " hide intro message
-  set showcmd           " display incomplete commands
-" set showmatch
+set showcmd           " display incomplete commands
+set showmatch
 set sidescrolloff=5
 set smartcase
 set smarttab
@@ -221,7 +242,7 @@ endif
 if v:version >= 700
   set viminfo=!,'20,<50,s10,h
 endif
-set visualbell
+set visualbell t_vb=
 set virtualedit=block
 set wildmenu
 set wildmode=longest:full,full
@@ -242,6 +263,7 @@ set backupskip=/tmp/*,/private/tmp/*
 set tabstop=2
 set shiftwidth=2
 set shiftround
+set softtabstop=2
 set expandtab
 
 " set cursorline
@@ -270,25 +292,23 @@ syntax on
 
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-" set t_8f=[[38;2;%lu;%lu;%lum
-" set t_8b=[[48;2;%lu;%lu;%lum
 set termguicolors
 
 set background=dark
 
 let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark = 'medium'
+let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_invert_selection=0
 colorscheme gruvbox
 
 " load matchit.vim but only if the user hasn't installed a newer version
-" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  " runtime! macros/matchit.vim
-" endif
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 
 " when the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes
-" let g:is_posix = 1
+let g:is_posix= 1
 
 " Sections: Theme Tweaks
 " ----------------------
@@ -307,6 +327,8 @@ if has("autocmd")
 
   augroup Misc
     autocmd!
+    " enable hardmode by default
+    autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
     " close quickfix / location list on selection
     autocmd FileType qf nmap <buffer> <CR> <CR>:lcl<CR>
     " automatic number toggle
@@ -322,25 +344,26 @@ if has("autocmd")
       \ endif
   augroup END
 
-  augroup Linting
-    autocmd!
-    " ALE events
-    if g:has_async
-      set updatetime=1000
-      let g:ale_lint_on_text_changed = 0
-      autocmd CursorHold * call ale#Lint()
-      autocmd CursorHoldI * call ale#Lint()
-      autocmd InsertEnter * call ale#Lint()
-      autocmd InsertLeave * call ale#Lint()
-    else
-      echoerr "dotfiles require NeoVim or Vim 8"
-    endif
-  augroup END
+  " augroup Linting
+  "   autocmd!
+  "   " ALE events
+  "   if g:has_async
+  "     set updatetime=1000
+  "     let g:ale_lint_on_text_changed = 0
+  "     autocmd CursorHold * call ale#Lint()
+  "     autocmd CursorHoldI * call ale#Lint()
+  "     autocmd InsertEnter * call ale#Lint()
+  "     autocmd InsertLeave * call ale#Lint()
+  "   else
+  "     echoerr "dotfiles require NeoVim or Vim 8"
+  "   endif
+  " augroup END
 
   augroup FTCheck
     autocmd!
     autocmd BufNewFile,BufRead *.txt,README,INSTALL,NEWS,TODO if &ft == ""|set ft=text|endif
     autocmd BufRead,BufNewFile *.md set filetype=markdown
+    autocmd BufRead,BufNewFile *.js set filetype=javascript
     autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
     autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
     autocmd FileType html,css,scss,twig EmmetInstall
@@ -356,7 +379,25 @@ if has("autocmd")
     autocmd FileType html                     setlocal iskeyword+=~
     autocmd FileType liquid,markdown,text,txt setlocal tw=78 linebreak nolist
   augroup END
-endif
+
+  augroup NetrwBufferHiddenFix
+    autocmd!
+    autocmd BufWinEnter * 
+    \  if &ft != 'netrw'
+    \|     set bufhidden=hide
+    \| endif
+    augroup end
+
+  endif
+
+" Section: Commands
+" ----------------
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " Section: Functions
 " ------------------
@@ -383,12 +424,10 @@ endfunction
 " Section: Plugin Configuration
 " -----------------------------
 
-" matchup
-" let g:matchup_enabled = 0
-
 " netrw
-let g:netrw_banner=0
-let g:netra_liststyle=3
+" let g:netra_liststyle=3
+" let g:netrw_banner=0
+" let g:netrw_winsize = 25
 
 " Emmet
 let g:user_emmet_install_global=0
@@ -404,10 +443,33 @@ let g:user_emmet_settings={
 " let g:solarized_visibility='normal'
 " let g:airline_solarized_bg='dark'
 
+" ALE
+let g:ale_lint_on_text_changed='never'
+let g:ale_lint_on_enter=0
+let g:ale_completion_enabled=1
+let g:airline#extensions#ale#enabled=1
+let g:ale_sign_error = '⨯⨯'
+let g:ale_sign_warning ='▸▸'
+let airline#extensions#ale#error_symbol = '⨯⨯:'
+let airline#extensions#ale#warning_symbol = '▸▸:'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_linters = {
+\  'javascript': ['prettier-eslint','eslint'],
+\  'vue': ['prettier'],
+\  'typescript': []
+\}
+let g:ale_fixers = {
+\  'javascript': ['eslint'],
+\  'vue': ['eslint'],
+\}
+let g:ale_pattern_options = {
+\ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
+\ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+\}
+" let g:ale_linter_aliases = {'vue': [ 'html' ]}
 " Airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
-" airline-abline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#show_splits=1
 let g:airline#extensions#tabline#show_buffers=1
@@ -418,17 +480,14 @@ let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#tab_nr_type=1
 let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#show_tab_type=0
-let g:airline#extensions#tabline#tabs_label='Tabs' 
+let g:airline#extensions#tabline#tabs_label='Tabs'
 let g:airline#extensions#tabline#buffers_label='buffers'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-" airline-tmuxline
-let g:airline#extensions#tmuxline#enabled=0
-" airline-ale
-let g:airline#extensions#ale#enabled=1
 
 " tmuxline
 let g:tmuxline_preset='powerline'
 " let g:tmuxline_theme = 'powerline'
+let g:airline#extensions#tmuxline#enabled=0
 
 let g:tmuxline_theme = {
   \ 'a'    : [ '#282828', '#a89984', 'bold' ],
@@ -442,7 +501,29 @@ let g:tmuxline_theme = {
   \ 'bg'   : [ '#fbf1c' , '#3c3836' ]}
 
 " quick-scope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " vim-indent-guides
 " let g:indent_guides_enable_on_vim_startup = 1
+
+" vim-sneak
+" let g:sneak#label=1
+" let g:sneak#streak=1
+
+" vim-clever-f
+let g:clever_f_across_no_line=1
+let g:clever_f_smart_case=0
+let g:clever_f_fix_key_direction=1
+let g:clever_f_show_prompt=0
+let g:clever_f_chars_match_any_signs=';'
+" let g:clever_f_mark_char_color='Search'
+
+" vim-hardmode
+let g:HardMode_hardmodeMsg='here be dragons'
+let g:HardMode_easymodeMsg='you are weak...'
+let g:HardMode_level='wannabe'
+
+" vim-hardtime
+let g:hardtime_default_on=1
+let g:hardtime_allow_different_key=1
+let g:hardtime_ignore_buffer_patterns=[".git/index"]
