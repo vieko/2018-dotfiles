@@ -40,9 +40,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
 Plug 'Valloric/MatchTagAlways'
 Plug 'tpope/vim-vinegar'
-Plug 'vieko/hardmode'
+Plug 'wikitopian/hardmode'
 Plug 'takac/vim-hardtime'
-" Plug 'andymass/vim-matchup'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'andymass/vim-matchup'
 " syntax
 Plug 'sheerun/vim-polyglot'
 " editing
@@ -77,16 +78,11 @@ let maplocalleader = " "
 " search for the word under the cursor, considering the current keyword setup for docset  lookup
 nmap <silent><Leader>d <Plug>DashSearch
 
-" open new line below and above current line
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
-
 " save
 nnoremap <Leader>w :w!<CR>
 
 " better escape
 inoremap jk <Esc>
-" inoremap <Esc> <nop>
 
 " insert mode movement
 inoremap <C-h> <C-o>h
@@ -95,21 +91,14 @@ inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 
 " Move across wrapped lines like regular lines
-noremap 0 ^
-noremap ^ 0
+" noremap 0 ^
+" noremap ^ 0
 
 " copy text to the end of the line (Y consistend with C and D)
 nnoremap Y y$
 
 " qq to record, q to stop recording, Q to replay
 nnoremap Q @q
-
-" open vertical split with new buffer
-" nnoremap <silent>vv :vnew<CR>
-" open empty buffer
-" nnoremap <Leader>t :enew<CR>
-" open empty tab
-" nnoremap <Leader>T :tabnew<CR>
 
 " close current buffer and move to previous one
 nnoremap <Leader>bq :bd<BAR>bd#<CR>
@@ -168,7 +157,7 @@ nmap <Leader>7 <Plug>AirlineSelectTab7
 nmap <Leader>8 <Plug>AirlineSelectTab8
 nmap <Leader>9 <Plug>AirlineSelectTab9
 
-" reset clever-f selection 
+" reset clever-f selection
 nmap <Leader>f <Plug>(clever-f-reset)
 
 " Section: Options
@@ -195,7 +184,7 @@ if has("eval")
 endif
 set fileformats=unix,dos,mac
 set fillchars+=vert:│
-set foldmethod=marker
+set foldmethod=indent
 set foldopen+=jump
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
@@ -302,9 +291,9 @@ let g:gruvbox_invert_selection=0
 colorscheme gruvbox
 
 " load matchit.vim but only if the user hasn't installed a newer version
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
+" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+"   runtime! macros/matchit.vim
+" endif
 
 " when the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes
@@ -312,8 +301,8 @@ let g:is_posix= 1
 
 " Sections: Theme Tweaks
 " ----------------------
-" highlight Visual guifg=white guibg=black ctermfg=white ctermbg=black
-" highlight MatchParen ctermbg=235
+highlight MatchParen guibg=#3c3836
+" highlight Visual ctermbg=235
 
 " special charaters
 " hi SpecialKey cterm=NONE ctermfg=0 ctermbg=NONE
@@ -382,7 +371,7 @@ if has("autocmd")
 
   augroup NetrwBufferHiddenFix
     autocmd!
-    autocmd BufWinEnter * 
+    autocmd BufWinEnter *
     \  if &ft != 'netrw'
     \|     set bufhidden=hide
     \| endif
@@ -420,6 +409,19 @@ function! StripWhitespace()
   call setpos('.', save_cursor)
   call setreg('/', old_query)
 endfunction
+
+" matchup convenience
+function! s:matchup_convenience_maps()
+  xnoremap <sid>(std-I) I
+  xnoremap <sid>(std-A) A
+  xmap <expr> I mode()=='<c-v>'?'<sid>(std-I)':(v:count?'':'1').'i'
+  xmap <expr> A mode()=='<c-v>'?'<sid>(std-A)':(v:count?'':'1').'a'
+  for l:v in ['', 'v', 'V', '<c-v>']
+    execute 'omap <expr>' l:v.'I%' "(v:count?'':'1').'".l:v."i%'"
+    execute 'omap <expr>' l:v.'A%' "(v:count?'':'1').'".l:v."a%'"
+  endfor
+endfunction
+call s:matchup_convenience_maps()
 
 " Section: Plugin Configuration
 " -----------------------------
@@ -479,7 +481,7 @@ let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#tab_nr_type=1
 let g:airline#extensions#tabline#show_tab_nr=1
-let g:airline#extensions#tabline#show_tab_type=0
+let g:airline#extensions#tabline#show_tab_type=1
 let g:airline#extensions#tabline#tabs_label='Tabs'
 let g:airline#extensions#tabline#buffers_label='buffers'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -526,4 +528,17 @@ let g:HardMode_level='wannabe'
 " vim-hardtime
 let g:hardtime_default_on=1
 let g:hardtime_allow_different_key=1
+let g:hardtime_showmsg=1
 let g:hardtime_ignore_buffer_patterns=[".git/index"]
+let g:list_of_normal_keys = ["h", "j", "k", "l", "+"]
+let g:list_of_visual_keys = ["h", "j", "k", "l", "-", "+"]
+let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_disabled_keys = []
+
+" rainbow_parentheses
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
+
+" vim-matchup
+let g:matchup_transmute_enabled=0
+let g:matchup_matchparen_deferred=1
