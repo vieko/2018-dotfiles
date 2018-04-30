@@ -44,6 +44,7 @@ Plug 'wikitopian/hardmode'
 Plug 'takac/vim-hardtime'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'andymass/vim-matchup'
+Plug 'mtth/scratch.vim'
 " syntax
 Plug 'sheerun/vim-polyglot'
 " editing
@@ -542,3 +543,10 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
 " vim-matchup
 let g:matchup_transmute_enabled=0
 let g:matchup_matchparen_deferred=1
+
+" vim-scratch
+let g:scratch_autohide=1
+let g:scratch_insert_autohide=0
+let g:scratch_height=20
+let g:scratch_top=0
+let g:scratch_persistence_file='/tmp/scratch.vim'
