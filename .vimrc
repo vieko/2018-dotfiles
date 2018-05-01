@@ -547,6 +547,6 @@ let g:matchup_matchparen_deferred=1
 " vim-scratch
 let g:scratch_autohide=1
 let g:scratch_insert_autohide=0
-let g:scratch_height=20
+let g:scratch_height=10
 let g:scratch_top=0
-let g:scratch_persistence_file='/tmp/scratch.vim'
+let g:scratch_no_mappings=1
