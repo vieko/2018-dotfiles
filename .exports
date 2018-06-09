@@ -38,3 +38,5 @@ export GREP_OPTIONS='--color=auto';
 
 # AWS Profile
 export AWS_PROFILE=devolver
+
+export TMUX_TMPDIR=~/.tmux/tmp
