@@ -28,6 +28,7 @@ brew install grep
 brew install ack
 brew install fzf
 brew install fd
+brew install ripgrep
 
 brew install python
 brew install node
@@ -45,6 +46,7 @@ brew install redis
 brew install dnsmasq
 
 brew install mcrypt
+brew install speedtest
 
 brew install composer
 
