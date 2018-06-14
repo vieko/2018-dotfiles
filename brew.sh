@@ -55,6 +55,7 @@ brew install vim --with-override-system-vi
 brew install mvim
 
 brew install git
+brew install git-flow
 brew install git-lfs
 brew install imagemagick --with-webp
 brew install rename
