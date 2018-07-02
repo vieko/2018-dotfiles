@@ -64,6 +64,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 " linting
 Plug 'w0rp/ale'
+Plug 'skywind3000/asyncrun.vim'
 " helpers
 Plug 'rizzatti/dash.vim'
 Plug 'tpope/vim-eunuch'
@@ -335,6 +336,10 @@ if has("autocmd")
   augroup END
 
   " augroup Linting
+  "   autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+  " augroup END
+
+  " augroup Linting
   "   autocmd!
   "   " ALE events
   "   if g:has_async
@@ -438,6 +443,9 @@ let g:user_emmet_leader_key='<C-Z>'
 let g:user_emmet_settings={
 \   'twig': {
 \     'extends': 'html',
+\   },
+\   'javascript.jsx': {
+\     'extends': 'jsx',
 \   },
 \ }
 
