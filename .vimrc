@@ -354,26 +354,26 @@ if has("autocmd")
   "   endif
   " augroup END
 
-  augroup FTCheck
-    autocmd!
-    autocmd BufNewFile,BufRead *.txt,README,INSTALL,NEWS,TODO if &ft == ""|set ft=text|endif
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
-    autocmd BufRead,BufNewFile *.js set filetype=javascript
-    autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
-    autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-    autocmd FileType html,css,scss,twig EmmetInstall
-  augroup END
+  " augroup FTCheck
+  "   autocmd!
+  "   autocmd BufNewFile,BufRead *.txt,README,INSTALL,NEWS,TODO if &ft == ""|set ft=text|endif
+  "   autocmd BufRead,BufNewFile *.md set filetype=markdown
+  "   autocmd BufRead,BufNewFile *.js set filetype=javascript
+  "   autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
+  "   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  "   autocmd FileType html,css,scss,twig EmmetInstall
+  " augroup END
 
-  augroup FTOptions
-    autocmd!
-    autocmd Syntax   javascript               setlocal isk+=$
-    autocmd FileType xml,xsd,xslt,javascript  setlocal ts=2
-    autocmd FileType text,txt,mail            setlocal ai com=fb:*,fb:-,n:>
-    autocmd FileType git,gitcommit            setlocal foldmethod=syntax foldlevel=1
-    autocmd FileType gitcommit                setlocal spell
-    autocmd FileType html                     setlocal iskeyword+=~
-    autocmd FileType liquid,markdown,text,txt setlocal tw=78 linebreak nolist
-  augroup END
+  " augroup FTOptions
+  "   autocmd!
+  "   autocmd Syntax   javascript               setlocal isk+=$
+  "   autocmd FileType xml,xsd,xslt,javascript  setlocal ts=2
+  "   autocmd FileType text,txt,mail            setlocal ai com=fb:*,fb:-,n:>
+  "   autocmd FileType git,gitcommit            setlocal foldmethod=syntax foldlevel=1
+  "   autocmd FileType gitcommit                setlocal spell
+  "   autocmd FileType html                     setlocal iskeyword+=~
+  "   autocmd FileType liquid,markdown,text,txt setlocal tw=78 linebreak nolist
+  " augroup END
 
   augroup NetrwBufferHiddenFix
     autocmd!
