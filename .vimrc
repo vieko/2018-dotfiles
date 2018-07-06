@@ -354,15 +354,15 @@ if has("autocmd")
   "   endif
   " augroup END
 
-  " augroup FTCheck
-  "   autocmd!
+  augroup FTCheck
+    autocmd!
   "   autocmd BufNewFile,BufRead *.txt,README,INSTALL,NEWS,TODO if &ft == ""|set ft=text|endif
   "   autocmd BufRead,BufNewFile *.md set filetype=markdown
   "   autocmd BufRead,BufNewFile *.js set filetype=javascript
   "   autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
   "   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-  "   autocmd FileType html,css,scss,twig EmmetInstall
-  " augroup END
+    autocmd FileType html,css,scss,twig EmmetInstall
+  augroup END
 
   " augroup FTOptions
   "   autocmd!
