@@ -1,12 +1,55 @@
 session_name: Summoning Demons
-start_directory: '~/Documents/Development/goodshepherd/goodshepherd.games'
 windows:
-  - window_name: Good Shepherd
-    focus: true
-    layout: 855b,254x53,0,0[254x46,0,0,1,254x6,0,47{127x6,0,47,8,126x6,128,47,9}]
-    panes:
-      - shell_command:
-        - vim
-        focus: true 
-      - blank
-      - blank 
+- layout: c55d,238x55,0,0,0
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: bash
+  start_directory: /Users/vieko/Documents/Development/goodshepherd/phantom-doctrine
+  window_name: phantom
+- layout: c55e,238x55,0,0,1
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: bash
+  start_directory: /Users/vieko/Documents/Development/goodshepherd/goodshepherd.games
+  window_name: dutch
+- layout: 6859,238x55,0,0{164x55,0,0,2,73x55,165,0,9}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - vim
+  - focus: 'true'
+    shell_command: bash
+  start_directory: /Users/vieko/Documents/Sandbox/react/github-battle
+  window_name: react
+- layout: c560,238x55,0,0,3
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: bash
+  start_directory: /Users/vieko/Documents/Sandbox/headless
+  window_name: headless
+- layout: 4f07,238x55,0,0{119x55,0,0[119x27,0,0,4,119x27,0,28,7],118x55,120,0[118x27,120,0,5,118x27,120,28,6]}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - bash
+  - focus: 'true'
+    shell_command: bash
+  - bash
+  - bash
+  start_directory: /Users/vieko
+  window_name: servers
+- focus: 'true'
+  layout: c565,238x55,0,0,8
+  options:
+    automatic-rename: 'off'
+  panes:
+  - focus: 'true'
+    shell_command: Python
+  start_directory: /Users/vieko/dotfiles/.tmuxp
+  window_name: scratch
