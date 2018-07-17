@@ -21,7 +21,7 @@ call plug#begin('~/.vim/bundle')
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'html', 'css'] }
 Plug 'tpope/vim-scriptease', { 'on': [] }
 Plug 'tpope/vim-projectionist', { 'on': [] }
 Plug 'AndrewRadev/splitjoin.vim'
@@ -361,7 +361,7 @@ if has("autocmd")
   "   autocmd BufRead,BufNewFile *.js set filetype=javascript
   "   autocmd BufRead,BufNewFile *.json set filetype=json syntax=javascript
   "   autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
-    autocmd FileType html,css,scss,twig EmmetInstall
+    autocmd FileType html,css,scss,twig,javascript.jsx EmmetInstall
   augroup END
 
   " augroup FTOptions
