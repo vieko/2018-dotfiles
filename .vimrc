@@ -465,18 +465,19 @@ let airline#extensions#ale#error_symbol = '⨯⨯:'
 let airline#extensions#ale#warning_symbol = '▸▸:'
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters = {
-\  'javascript': ['prettier-eslint','eslint'],
-\  'vue': ['prettier'],
+\  'javascript': ['eslint'],
+\  'vue': ['eslint'],
 \  'typescript': []
 \}
 let g:ale_fixers = {
-\  'javascript': ['eslint'],
-\  'vue': ['eslint'],
+\  'javascript': ['prettier'],
+\  'vue': ['prettier'],
 \}
 let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
 \}
+let g:ale_javascript_prettier_use_local_config = 1
 " let g:ale_linter_aliases = {'vue': [ 'html' ]}
 " Airline
 let g:airline_theme='gruvbox'
