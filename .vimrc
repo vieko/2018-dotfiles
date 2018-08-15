@@ -68,6 +68,7 @@ Plug 'skywind3000/asyncrun.vim'
 " helpers
 Plug 'rizzatti/dash.vim'
 Plug 'tpope/vim-eunuch'
+Plug 'shime/vim-livedown'
 
 call plug#end()
 
@@ -283,7 +284,7 @@ syntax on
 
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
+" set termguicolors
 
 set background=dark
 
@@ -497,7 +498,7 @@ let g:airline#extensions#tabline#buffers_label='buffers'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " tmuxline
-let g:tmuxline_preset='powerline'
+let g:tmuxline_preset='airline_visual'
 " let g:tmuxline_theme = 'powerline'
 let g:airline#extensions#tmuxline#enabled=0
 
