@@ -25,6 +25,9 @@ Plug 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'html', 'css'] }
 Plug 'tpope/vim-scriptease', { 'on': [] }
 Plug 'tpope/vim-projectionist', { 'on': [] }
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'chrisbra/NrrwRgn'
+Plug 'godlygeek/tabular'
+Plug 'wesQ3/vim-windowswap'
 " Plug 'unblevable/quick-scope'
 " Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
@@ -69,6 +72,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'rizzatti/dash.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'shime/vim-livedown'
+Plug 'tyru/open-browser.vim'
 
 call plug#end()
 
@@ -117,13 +121,16 @@ nnoremap <C-b> :Buffers<CR>
 " search content of all files under cwd
 nnoremap <C-g> :Rg<CR>
 " search all open buffers
-nnoremap <C-f> :Lines<CR>
+" nnoremap <C-f> :Lines<CR>
+
+" ALEFix
+nnoremap <C-f> :ALEFix<CR>
 
 " prevent accidental undos under insert mode
 inoremap <C-U> <C-G>u<C-U>
 
 " remove trailing whitespaces
-nnoremap <Leader>sw :call StripWhitespace()<CR>
+nnoremap <Leader>ss :call StripWhitespace()<CR>
 
 " tab completion
 inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
@@ -162,6 +169,17 @@ nmap <Leader>9 <Plug>AirlineSelectTab9
 
 " reset clever-f selection
 nmap <Leader>f <Plug>(clever-f-reset)
+
+" windowswap commands
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <leader>sw :call WindowSwap#EasyWindowSwap()<CR>
+
+" open-browser.vim
+let g:netrw_nogx = 1
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 
 " Section: Options
 " ----------------
@@ -284,13 +302,14 @@ syntax on
 
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-" set termguicolors
+set termguicolors
 
 set background=dark
 
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_invert_selection=0
+let g:gruvbox_termcolors=256
 colorscheme gruvbox
 
 " load matchit.vim but only if the user hasn't installed a newer version
@@ -457,7 +476,7 @@ let g:user_emmet_settings={
 
 " ALE
 let g:ale_lint_on_text_changed='never'
-let g:ale_lint_on_enter=0
+let g:ale_lint_on_enter=1
 let g:ale_completion_enabled=1
 let g:airline#extensions#ale#enabled=1
 let g:ale_sign_error = '⨯⨯'
@@ -466,19 +485,20 @@ let airline#extensions#ale#error_symbol = '⨯⨯:'
 let airline#extensions#ale#warning_symbol = '▸▸:'
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters = {
-\  'javascript': ['eslint'],
+\  'javascript': ['standard'],
 \  'vue': ['eslint'],
 \  'typescript': []
 \}
 let g:ale_fixers = {
-\  'javascript': ['prettier'],
+\  'javascript': ['prettier_standard'],
 \  'vue': ['prettier'],
+\  'html': ['tidy']
 \}
 let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
 \}
-let g:ale_javascript_prettier_use_local_config = 1
+" let g:ale_javascript_prettier_use_local_config = 1
 " let g:ale_linter_aliases = {'vue': [ 'html' ]}
 " Airline
 let g:airline_theme='gruvbox'
@@ -498,7 +518,7 @@ let g:airline#extensions#tabline#buffers_label='buffers'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " tmuxline
-let g:tmuxline_preset='airline_visual'
+let g:tmuxline_preset='powerline'
 " let g:tmuxline_theme = 'powerline'
 let g:airline#extensions#tmuxline#enabled=0
 
