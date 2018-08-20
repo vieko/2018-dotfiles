@@ -31,6 +31,7 @@ Plug 'wesQ3/vim-windowswap'
 " Plug 'unblevable/quick-scope'
 " Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
+Plug 'ludovicchabant/vim-gutentags'
 " themes
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
@@ -122,6 +123,8 @@ nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Rg<CR>
 " search all open buffers
 " nnoremap <C-f> :Lines<CR>
+" search tags in project
+nnoremap <C-t> :Tags<CR>
 
 " ALEFix
 nnoremap <C-f> :ALEFix<CR>
@@ -359,20 +362,20 @@ if has("autocmd")
   "   autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
   " augroup END
 
-  " augroup Linting
-  "   autocmd!
-  "   " ALE events
-  "   if g:has_async
-  "     set updatetime=1000
-  "     let g:ale_lint_on_text_changed = 0
-  "     autocmd CursorHold * call ale#Lint()
-  "     autocmd CursorHoldI * call ale#Lint()
-  "     autocmd InsertEnter * call ale#Lint()
-  "     autocmd InsertLeave * call ale#Lint()
-  "   else
-  "     echoerr "dotfiles require NeoVim or Vim 8"
-  "   endif
-  " augroup END
+  augroup Linting
+    autocmd!
+    " ALE events
+    if g:has_async
+      set updatetime=1000
+      let g:ale_lint_on_text_changed = 0
+      autocmd CursorHold * call ale#Lint()
+      autocmd CursorHoldI * call ale#Lint()
+      autocmd InsertEnter * call ale#Lint()
+      autocmd InsertLeave * call ale#Lint()
+    else
+      echoerr "dotfiles require NeoVim or Vim 8"
+    endif
+  augroup END
 
   augroup FTCheck
     autocmd!
@@ -467,6 +470,9 @@ let g:user_emmet_settings={
 \   'javascript.jsx': {
 \     'extends': 'jsx',
 \   },
+\   'html': {
+\     'quote_char': "'",
+\   },
 \ }
 
 " Solarized
@@ -513,9 +519,13 @@ let g:airline#extensions#tabline#show_close_button=0
 let g:airline#extensions#tabline#tab_nr_type=1
 let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#show_tab_type=1
-let g:airline#extensions#tabline#tabs_label='Tabs'
+let g:airline#extensions#tabline#tabs_label='tabs'
 let g:airline#extensions#tabline#buffers_label='buffers'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.notexists=' ∄'
 
 " tmuxline
 let g:tmuxline_preset='powerline'
