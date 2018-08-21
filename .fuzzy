@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 fzf-down() {
   fzf --height 50% "$@" --border
 }
@@ -95,4 +97,3 @@ fo() {
     fi
   fi
 }
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -17,38 +17,43 @@ let g:has_async = v:version >= 800 || has('nvim')
 
 call plug#begin('~/.vim/bundle')
 
+" dark power
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+" snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'epilande/vim-es2015-snippets', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'epilande/vim-react-snippets', { 'for': ['javascript', 'javascript.jsx'] }
+" autocomplete
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 " workflows
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'mattn/emmet-vim', { 'for': ['javascript.jsx', 'html', 'css'] }
-Plug 'tpope/vim-scriptease', { 'on': [] }
-Plug 'tpope/vim-projectionist', { 'on': [] }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'godlygeek/tabular'
 Plug 'wesQ3/vim-windowswap'
-" Plug 'unblevable/quick-scope'
-" Plug 'justinmk/vim-sneak'
 Plug 'rhysd/clever-f.vim'
 Plug 'ludovicchabant/vim-gutentags'
 " themes
-Plug 'chriskempson/base16-vim'
-Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 " interface
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'kshenoy/vim-signature'
 Plug 'Valloric/MatchTagAlways'
 Plug 'tpope/vim-vinegar'
 Plug 'wikitopian/hardmode'
 Plug 'takac/vim-hardtime'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'andymass/vim-matchup'
-Plug 'mtth/scratch.vim'
 " syntax
 Plug 'sheerun/vim-polyglot'
 " editing
@@ -68,7 +73,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 " linting
 Plug 'w0rp/ale'
-Plug 'skywind3000/asyncrun.vim'
 " helpers
 Plug 'rizzatti/dash.vim'
 Plug 'tpope/vim-eunuch'
@@ -136,8 +140,8 @@ inoremap <C-U> <C-G>u<C-U>
 nnoremap <Leader>ss :call StripWhitespace()<CR>
 
 " tab completion
-inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <C-n>
+" inoremap <Tab> <C-r>=InsertTabWrapper()<CR>
+" inoremap <S-Tab> <C-n>
 
 " clear highlights
 nnoremap <silent> <Leader><CR> :noh<CR>
@@ -199,6 +203,7 @@ set clipboard=unnamed
 set cmdheight=2       " command bar height
 setglobal commentstring=#\ %s
 set complete-=i
+set completeopt=longest,menuone,preview
 set confirm           " prompt to save when command fails
 set dictionary+=/usr/share/dict/words
 set display+=lastline
@@ -208,7 +213,7 @@ if has("eval")
 endif
 set fileformats=unix,dos,mac
 set fillchars+=vert:│
-set foldmethod=indent
+set foldmethod=syntax
 set foldopen+=jump
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
@@ -278,25 +283,16 @@ set shiftwidth=2
 set shiftround
 set softtabstop=2
 set expandtab
-
-" set cursorline
 set cursorline
-
-set textwidth=100
+set textwidth=80
 set colorcolumn=+1
-
 set number relativenumber
-" set number
 set numberwidth=5
-
 set splitbelow
 set splitright
 
 " threat <li> <p> tags like block tags
 let g:html_indent_tags = 'li|p'
-
-" Section: Performance
-" --------------------
 
 " Sections: Visuals
 " -----------------
@@ -315,11 +311,6 @@ let g:gruvbox_invert_selection=0
 let g:gruvbox_termcolors=256
 colorscheme gruvbox
 
-" load matchit.vim but only if the user hasn't installed a newer version
-" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-"   runtime! macros/matchit.vim
-" endif
-
 " when the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes
 let g:is_posix= 1
@@ -327,17 +318,17 @@ let g:is_posix= 1
 " Sections: Theme Tweaks
 " ----------------------
 highlight MatchParen guibg=#3c3836
-" highlight Visual ctermbg=235
-
-" special charaters
-" hi SpecialKey cterm=NONE ctermfg=0 ctermbg=NONE
-" hi NonText cterm=NONE ctermfg=0 ctermbg=NONE
 
 " Section: AutoCommands
 " ---------------------
 
 if has("autocmd")
   filetype plugin indent on
+
+  augroup Folding
+    autocmd!
+    autocmd FileType javascript setlocal foldmethod=syntax
+  augroup END
 
   augroup Misc
     autocmd!
@@ -357,10 +348,6 @@ if has("autocmd")
       \   exe "normal g`\"" |
       \ endif
   augroup END
-
-  " augroup Linting
-  "   autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
-  " augroup END
 
   augroup Linting
     autocmd!
@@ -475,11 +462,6 @@ let g:user_emmet_settings={
 \   },
 \ }
 
-" Solarized
-" let g:solarized_contrast='high'
-" let g:solarized_visibility='normal'
-" let g:airline_solarized_bg='dark'
-
 " ALE
 let g:ale_lint_on_text_changed='never'
 let g:ale_lint_on_enter=1
@@ -504,8 +486,7 @@ let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
 \}
-" let g:ale_javascript_prettier_use_local_config = 1
-" let g:ale_linter_aliases = {'vue': [ 'html' ]}
+
 " Airline
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts=1
@@ -529,7 +510,6 @@ let g:airline_symbols.notexists=' ∄'
 
 " tmuxline
 let g:tmuxline_preset='powerline'
-" let g:tmuxline_theme = 'powerline'
 let g:airline#extensions#tmuxline#enabled=0
 
 let g:tmuxline_theme = {
@@ -543,23 +523,12 @@ let g:tmuxline_theme = {
   \ 'cwin' : [ '#a89984', '#504945' ],
   \ 'bg'   : [ '#fbf1c' , '#3c3836' ]}
 
-" quick-scope
-" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" vim-indent-guides
-" let g:indent_guides_enable_on_vim_startup = 1
-
-" vim-sneak
-" let g:sneak#label=1
-" let g:sneak#streak=1
-
 " vim-clever-f
 let g:clever_f_across_no_line=1
 let g:clever_f_smart_case=0
 let g:clever_f_fix_key_direction=1
 let g:clever_f_show_prompt=0
 let g:clever_f_chars_match_any_signs=';'
-" let g:clever_f_mark_char_color='Search'
 
 " vim-hardmode
 let g:HardMode_hardmodeMsg='here be dragons'
@@ -590,3 +559,27 @@ let g:scratch_insert_autohide=0
 let g:scratch_height=10
 let g:scratch_top=0
 let g:scratch_no_mappings=1
+
+" deoplete
+let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_yarp=1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
+let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+\ 'tern#Complete',
+\ 'jspc#omni'
+\]
+let g:deoplete#sources = {}
+let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+
+" tern
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']

@@ -14,7 +14,7 @@ export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 # Python 
-export PATH="$PATH:$HOME/library/python/3.6/bin"
+export PATH="$PATH:$HOME/usr/local/Cellar/python/3.7.0/bin"
 
 # Node
 export NODE_PATH="/usr/local/lib/node_modules"
