@@ -506,7 +506,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-let g:airline_symbols.notexists=' ∄'
+let g:airline_symbols.notexists=' ⁇'
 
 " tmuxline
 let g:tmuxline_preset='powerline'
