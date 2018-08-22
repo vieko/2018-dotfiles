@@ -74,7 +74,6 @@ Plug 'junegunn/gv.vim'
 " linting
 Plug 'w0rp/ale'
 " helpers
-Plug 'rizzatti/dash.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'shime/vim-livedown'
 Plug 'tyru/open-browser.vim'
@@ -87,9 +86,6 @@ call plug#end()
 let mapleader = " "
 let maplocalleader = " "
 
-" search for the word under the cursor, considering the current keyword setup for docset  lookup
-nmap <silent><Leader>d <Plug>DashSearch
-
 " save
 nnoremap <Leader>w :w!<CR>
 
@@ -97,14 +93,10 @@ nnoremap <Leader>w :w!<CR>
 inoremap jk <Esc>
 
 " insert mode movement
-inoremap <C-h> <C-o>h
-inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
-
-" Move across wrapped lines like regular lines
-" noremap 0 ^
-" noremap ^ 0
+" inoremap <C-h> <C-o>h
+" inoremap <C-l> <C-o>a
+" inoremap <C-j> <C-o>j
+" inoremap <C-k> <C-o>k
 
 " copy text to the end of the line (Y consistend with C and D)
 nnoremap Y y$
@@ -202,8 +194,9 @@ endif
 set clipboard=unnamed
 set cmdheight=2       " command bar height
 setglobal commentstring=#\ %s
-set complete-=i
-set completeopt=longest,menuone,preview
+set completeopt=menu,menuone,longest
+set complete=.,w,b,u,t
+set pumheight=15
 set confirm           " prompt to save when command fails
 set dictionary+=/usr/share/dict/words
 set display+=lastline
@@ -351,7 +344,6 @@ if has("autocmd")
 
   augroup Linting
     autocmd!
-    " ALE events
     if g:has_async
       set updatetime=1000
       let g:ale_lint_on_text_changed = 0
@@ -392,6 +384,12 @@ if has("autocmd")
     \|     set bufhidden=hide
     \| endif
     augroup end
+
+  " augroup omnifuncs
+  "   autocmd!
+  "   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  "   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  " augroup end
 
   endif
 
@@ -553,33 +551,55 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
 let g:matchup_transmute_enabled=0
 let g:matchup_matchparen_deferred=1
 
-" vim-scratch
-let g:scratch_autohide=1
-let g:scratch_insert_autohide=0
-let g:scratch_height=10
-let g:scratch_top=0
-let g:scratch_no_mappings=1
-
-" deoplete
+" deoplete options
 let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_yarp=1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-\ 'tern#Complete',
-\ 'jspc#omni'
-\]
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:deoplete#enable_ignore_case=1
+let g:deoplete#enable_smart_case=1
+let g:deoplete#enable_camel_case=1
+let g:deoplete#enable_refresh_always=1
+let g:deoplete#max_abbr_width=0
+let g:deoplete#max_menu_width=0
+" init deoplete dictionaries
+let g:deoplete#ignore_sources={}
+let g:deoplete#omni#input_patterns={}
+let g:deoplete#omni_patterns={}
+let g:deoplete#keyword_patterns={}
+" sh
+let g:deoplete#ignore_sources.sh=['around', 'member', 'tag', 'syntax']
+" markdown
+let g:deoplete#ignore_sources.markdown=['tag']
+" javascript
+let g:deoplete#omni#input_patterns.javascript=['[^. \t0-9]\.\w*']
+let g:deoplete#ignore_sources.javascript=['omni']
+call deoplete#custom#source('ternjs', 'mark', 'tern')
+call deoplete#custom#source('ternjs', 'rank', 9999)
+" vim
+let g:deoplete#ignore_sources.vim=['tag']
+" public settings
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('file/include', 'matchers', ['matcher_head'])
+let g:deoplete#ignore_sources._=['around', 'LanguageClient']
+for key in keys(g:deoplete#ignore_sources)
+  if key !=# '_' && index(keys(get(g:, 'LanguageClient_serverCommands', {})), key) == -1
+    let g:deoplete#ignore_sources[key] = g:deoplete#ignore_sources[key] + ['around', 'LanguageClient']
+  endif
+endfor
+inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+set isfname-==
+
+" let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+" let g:deoplete#omni#functions = {}
+" let g:deoplete#omni#functions.javascript = [
+" \ 'tern#Complete',
+" \ 'jspc#omni'
+" \]
+
+" let g:deoplete#sources = {}
+" let g:deoplete#sources['javascript.jsx'] = ['file', 'tag', 'ternjs']
 
 " tern
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
 let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
+let g:tern#arguments = ['--persistent','--no-port-file']
