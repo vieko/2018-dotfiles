@@ -40,7 +40,7 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'godlygeek/tabular'
 Plug 'wesQ3/vim-windowswap'
 Plug 'rhysd/clever-f.vim'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " themes
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
@@ -71,6 +71,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-haml', { 'for': 'ruby' }
 " linting
 Plug 'w0rp/ale'
 " helpers
@@ -120,7 +121,7 @@ nnoremap <C-g> :Rg<CR>
 " search all open buffers
 " nnoremap <C-f> :Lines<CR>
 " search tags in project
-nnoremap <C-t> :Tags<CR>
+" nnoremap <C-t> :Tags<CR>
 
 " ALEFix
 nnoremap <C-f> :ALEFix<CR>
@@ -318,6 +319,12 @@ highlight MatchParen guibg=#3c3836
 if has("autocmd")
   filetype plugin indent on
 
+  augroup Complete
+    autocmd!
+    autocmd FileType html
+    \ call deoplete#custom#buffer_option('auto_complete', v:false)
+  augroup END
+
   augroup Folding
     autocmd!
     autocmd FileType javascript setlocal foldmethod=syntax
@@ -325,6 +332,7 @@ if has("autocmd")
 
   augroup Misc
     autocmd!
+    autocmd VimEnter * :call TernPrep()
     " enable hardmode by default
     autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
     " close quickfix / location list on selection
@@ -404,6 +412,13 @@ command! -bang -nargs=* Rg
 
 " Section: Functions
 " ------------------
+function! TernPrep()
+  if !empty(glob(join([getcwd(), ".tern-port"], "/")))
+    echo ".tern-port exists, deleting with result:"
+    echo delete(fnameescape(join([getcwd(), ".tern-port"], "/"))) == 0 ? "Success" : "Fail"
+  endif
+endfunction
+
 " will insert a tab at the beginning of a line,
 " will use completion if not at beginning
 function! InsertTabWrapper()
@@ -565,16 +580,12 @@ let g:deoplete#omni#input_patterns={}
 let g:deoplete#omni_patterns={}
 let g:deoplete#keyword_patterns={}
 " sh
-let g:deoplete#ignore_sources.sh=['around', 'member', 'tag', 'syntax']
-" markdown
-let g:deoplete#ignore_sources.markdown=['tag']
+let g:deoplete#ignore_sources.sh=['around', 'member', 'syntax']
 " javascript
 let g:deoplete#omni#input_patterns.javascript=['[^. \t0-9]\.\w*']
 let g:deoplete#ignore_sources.javascript=['omni']
 call deoplete#custom#source('ternjs', 'mark', 'tern')
 call deoplete#custom#source('ternjs', 'rank', 9999)
-" vim
-let g:deoplete#ignore_sources.vim=['tag']
 " public settings
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#source('file/include', 'matchers', ['matcher_head'])
