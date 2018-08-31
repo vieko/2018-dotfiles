@@ -21,6 +21,10 @@ call plug#begin('~/.vim/bundle')
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'Shougo/context_filetype.vim'
+Plug 'Shougo/neopairs.vim'
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neoinclude.vim'
 " snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -193,9 +197,10 @@ if exists('+breakindent')
 endif
 " set binary
 set clipboard=unnamed
-set cmdheight=2       " command bar height
+" set cmdheight=2       " command bar height
+set noshowmode
 setglobal commentstring=#\ %s
-set completeopt=menu,menuone,longest
+set completeopt=menu,menuone,longest,noselect
 set complete=.,w,b,u,t
 set pumheight=15
 set confirm           " prompt to save when command fails
@@ -209,6 +214,7 @@ set fileformats=unix,dos,mac
 set fillchars+=vert:│
 set foldmethod=syntax
 set foldopen+=jump
+set nofoldenable
 set formatoptions+=j " delete comment character when joining commented lines
 set grepprg=rg\ --color=never
 set nohidden
@@ -234,7 +240,7 @@ set pastetoggle=<F2>
 set printoptions=paper:letter
 set ruler             " show the cursor position at all times
 set scrolloff=3       " always show at least one line above / below cursor
-set shortmess=atI     " hide intro message
+" set shortmess=atI     " hide intro message
 set showcmd           " display incomplete commands
 set showmatch
 set sidescrolloff=5
@@ -325,10 +331,10 @@ if has("autocmd")
     \ call deoplete#custom#buffer_option('auto_complete', v:false)
   augroup END
 
-  augroup Folding
-    autocmd!
-    autocmd FileType javascript setlocal foldmethod=syntax
-  augroup END
+  " augroup Folding
+  "   autocmd!
+  "   autocmd FileType javascript setlocal foldmethod=syntax
+  " augroup END
 
   augroup Misc
     autocmd!
@@ -566,14 +572,20 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
 let g:matchup_transmute_enabled=0
 let g:matchup_matchparen_deferred=1
 
+" neopairs
+let g:neopairs#enable=1
+" echodoc
+let g:echodoc_enable_at_startup=1
 " deoplete options
 let g:deoplete#enable_at_startup=1
+let g:deoplete#yarp=1
 let g:deoplete#enable_ignore_case=1
 let g:deoplete#enable_smart_case=1
 let g:deoplete#enable_camel_case=1
-let g:deoplete#enable_refresh_always=1
+let g:deoplete#enable_refresh_always=0
 let g:deoplete#max_abbr_width=0
 let g:deoplete#max_menu_width=0
+let g:deoplete#num_processes=0
 " init deoplete dictionaries
 let g:deoplete#ignore_sources={}
 let g:deoplete#omni#input_patterns={}
@@ -598,16 +610,6 @@ endfor
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 set isfname-==
-
-" let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.javascript = [
-" \ 'tern#Complete',
-" \ 'jspc#omni'
-" \]
-
-" let g:deoplete#sources = {}
-" let g:deoplete#sources['javascript.jsx'] = ['file', 'tag', 'ternjs']
 
 " tern
 let g:tern_request_timeout = 1

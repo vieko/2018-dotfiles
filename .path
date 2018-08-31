@@ -13,8 +13,11 @@ export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 # Composer
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 
-# Python 
-export PATH="$PATH:$HOME/usr/local/Cellar/python/3.7.0/bin"
+# pyenv
+export PATH="~/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+PYENV_ROOT="$(pyenv root)"
 
 # Node
 export NODE_PATH="/usr/local/lib/node_modules"

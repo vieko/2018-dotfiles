@@ -5,6 +5,9 @@
 .vim/backups/
 .vim/undo/
 .vim/undos/
+nvim/swaps/
+nvim/backups/
+nvim/undos/
 
 # Compiled Python files
 *.pyc
