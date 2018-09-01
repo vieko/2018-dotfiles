@@ -10,7 +10,16 @@ augroup DeniteResize
 augroup end
 
 " custom prompt
-call denite#custom#option('default', {'prompt': '⚡'})
+call denite#custom#option(
+      \'default', {
+      \ 'prompt': '⚡',
+      \ 'mode': 'insert',
+      \ 'quit': 1,
+      \ 'winheight': 15,
+      \ 'highlight_matched_char': 'Special',
+      \ 'highlight_matched_range': 'Type',
+      \ 'highlight_preview_line': 'Search'
+      \ })
 
 " file search
 nnoremap <C-p> :<C-u>Denite file_rec<CR>

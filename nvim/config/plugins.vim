@@ -22,7 +22,7 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('Shougo/neco-vim')
   call dein#add('ncm2/ncm2-vim')
   call dein#add('ncm2/ncm2-html-subscope')
-  call dein#add('ncm2/ncm2-match-highlight')
+  " call dein#add('ncm2/ncm2-match-highlight')
   call dein#add('ncm2/ncm2-highprio-pop')
   " dark power
   call dein#add('Shougo/context_filetype.vim')

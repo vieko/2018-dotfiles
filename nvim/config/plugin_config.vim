@@ -74,4 +74,4 @@ let g:echodoc_enable_at_startup=1
 let g:jsx_ext_required = 0
 
 " ncm2-match-highlight
-let g:ncm2#match_highlight = 'bold'
+" let g:ncm2#match_highlight = 'sans-serif-bold'
