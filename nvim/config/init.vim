@@ -105,13 +105,24 @@ let g:gruvbox_invert_selection=0
 let g:gruvbox_termcolors=256
 colorscheme gruvbox
 highlight MatchParen guibg=#3c3836
-highlight link deniteMatchedChar Special
+" highlight link deniteMatchedChar Special
 
 " Section: JavaScript
 " -------------------
 
 set path=.
 set suffixesadd=.js,.jsx
+
+function! LoadMainNodeModule(fname)
+  let nodeModules = "./node_modules/"
+  let packageJsonPath = nodeModules . a:fname . "/package.json"
+  if filereadable(packageJsonPath)
+    return nodeModules . a:fname . "/" . json_decode(join(readfile(packageJsonPath))).main
+  else
+    return nodeModules . a:fname
+  endif
+endfunction
+
 set includeexpr=LoadMainNodeModules(v:fname)
 
 " Section: Commands
@@ -149,17 +160,6 @@ augroup END
 
 " Section: Functions
 " ------------------
-
-function! LoadMainNodeModules(fname)
-  let nodeModules = './node_modules/'
-  let packageJsonPath = nodeModules . a:fname . '/package.json'
-
-  if filereadable(packageJsonPath)
-    return nodeModules . a:fname . '/' . json_decode(join(readfile(packageJsonPath))).main
-  else
-    return nodeModules . a:fname
-  endif
-endfunction
 
 function! s:matchup_convenience_maps()
   xnoremap <sid>(std-I) I

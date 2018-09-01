@@ -24,3 +24,6 @@ export NODE_PATH="/usr/local/lib/node_modules"
 
 # rbenv fix
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# aws profile
+export AWS_PROFILE=nighthawk

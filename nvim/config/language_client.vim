@@ -1,13 +1,13 @@
 " Section: Language Client
 " ------------------------
 
+let g:LanguageClient_selectionUI = 'location-list'
+
+let g:LanguageClient_loggingLevel = 'info'
+let g:LanguageClient_loggingFile = '/tmp/languageclient.log'
+let g:LanguageClient_serverStderr = '/tmp/languageserver.log'
+
 let g:LanguageClient_serverCommands = {}
-
-let g:LanguageClient_diagnosticsList = 'location'
-
-let g:LanguageClient_loggingLevel = 'INFO'
-let g:LanguageClient_loggingFile = '/tmp/LanguageClient.log'
-let g:LanguageClient_serverStderr = '/tmp/LanguageServer.log'
 
 if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']

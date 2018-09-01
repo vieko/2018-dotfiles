@@ -1,5 +1,4 @@
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-set runtimepath+=/usr/local/opt/fzf
 
 " Section: Plugins
 " ----------------
