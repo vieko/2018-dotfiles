@@ -8,10 +8,10 @@ set autoread
 set autowrite
 set backspace=indent,eol,start
 set breakindent showbreak=\ +
-set cmdheight=2
-" set noshowmode
+" set cmdheight=2
+set noshowmode
 setglobal commentstring=#\ %s
-set completeopt=menu,menuone,longest,noselect
+set completeopt=noinsert,menuone,noselect
 set complete=.,w,b,u,t,i
 set clipboard=unnamedplus
 set pumheight=15
@@ -105,25 +105,6 @@ let g:gruvbox_invert_selection=0
 let g:gruvbox_termcolors=256
 colorscheme gruvbox
 highlight MatchParen guibg=#3c3836
-" highlight link deniteMatchedChar Special
-
-" Section: JavaScript
-" -------------------
-
-set path=.
-set suffixesadd=.js,.jsx
-
-function! LoadMainNodeModule(fname)
-  let nodeModules = "./node_modules/"
-  let packageJsonPath = nodeModules . a:fname . "/package.json"
-  if filereadable(packageJsonPath)
-    return nodeModules . a:fname . "/" . json_decode(join(readfile(packageJsonPath))).main
-  else
-    return nodeModules . a:fname
-  endif
-endfunction
-
-set includeexpr=LoadMainNodeModules(v:fname)
 
 " Section: Commands
 " ---------------------

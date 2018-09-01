@@ -1,10 +1,12 @@
 " Section: Keybindings
 " --------------------
 
-nnoremap ; :
-
+" better leader
 let mapleader = " "
 let maplocalleader = " "
+
+" action with ;
+nnoremap ; :
 
 " save
 nnoremap <Leader>w :w!<CR>
@@ -20,8 +22,10 @@ nnoremap Q @q
 
 " close current buffer and move to previous one
 nnoremap <Leader>bq :bd<BAR>bd#<CR>
+
 " change pwd to current working directory
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
+
 " switch between the last two files
 nnoremap <Leader><Leader> <C-^>
 
@@ -63,13 +67,6 @@ nmap <Leader>9 <Plug>AirlineSelectTab9
 let g:netrw_nogx = 1
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" keybindings for language client
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 
 " ALE
 nmap <F8> <Plug>(ale_fix)

@@ -8,6 +8,7 @@ source $HOME/nvim/config/init.vim
 source $HOME/nvim/config/plugin_config.vim
 source $HOME/nvim/config/powerline.vim
 source $HOME/nvim/config/denite.vim
-source $HOME/nvim/config/deoplete.vim
-source $HOME/nvim/config/language_client.vim
+" source $HOME/nvim/config/deoplete.vim
+" source $HOME/nvim/config/language_client.vim
+source $HOME/nvim/config/completion.vim
 source $HOME/nvim/config/keybindings.vim

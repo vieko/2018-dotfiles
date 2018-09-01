@@ -23,3 +23,6 @@ endif
 if executable('bash-language-server')
   let g:LanguageClient_serverCommands.sh = ['bash-language-server', 'start']
 endif
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>

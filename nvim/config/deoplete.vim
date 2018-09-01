@@ -23,6 +23,7 @@ let g:deoplete#ignore_sources._=['around', 'buffer', 'file', 'member']
 
 " configuration
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 set isfname-==
