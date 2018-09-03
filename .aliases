@@ -1,5 +1,28 @@
 #!/usr/bin/env bash
 
+fnKeys=('^[OP' '^[OQ' '^[OR' '^[OS' '^[[15~' '^[[17~' '^[[18~' '^[[19~' '^[[20~' '^[[21~' '^[[23~' '^[[24~')
+touchBarState=''
+
+function _clearTouchbar() {
+  echo -ne "\033]1337;PopKeyLabels\a"
+}
+
+function _unbindTouchbar() {
+  for fnKey in "$fnKeys[@]"; do
+    bind -s "$fnKey" ''
+  done
+}
+
+function _displayDefault() {
+  _clearTouchbar
+  # _unbindTouchbar
+  echo -ne "\033]1337;SetKeyLabel=F1=Help\a"
+  echo -ne "\033]1337;SetKeyLabel=F2=Delete Whitespace\a"
+  echo -ne "\033]1337;SetKeyLabel=F3=Quick Fix\a"
+}
+
+_displayDefault
+
 alias ssh='TERM=xterm-256color ssh'
 alias ctags="`brew --prefix`/bin/ctags"
 alias vim='nvim'

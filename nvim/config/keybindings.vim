@@ -33,7 +33,7 @@ nnoremap <Leader><Leader> <C-^>
 inoremap <C-U> <C-G>u<C-U>
 
 " Delete trailing whitespace with F5
-:nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+:nnoremap <silent> <F2> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 " clear highlights
 nnoremap <silent> <Leader><CR> :noh<CR>
@@ -69,4 +69,4 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
 " ALE
-nmap <F8> <Plug>(ale_fix)
+nmap <F3> <Plug>(ale_fix)
