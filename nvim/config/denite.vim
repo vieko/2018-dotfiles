@@ -15,7 +15,7 @@ call denite#custom#option(
       \ 'prompt': '⚡',
       \ 'mode': 'insert',
       \ 'quit': 1,
-      \ 'winheight': 15,
+      \ 'winheight': 40*winheight(0)/100,
       \ 'highlight_matched_char': 'Special',
       \ 'highlight_matched_range': 'Type',
       \ 'highlight_preview_line': 'Search'
@@ -26,14 +26,17 @@ nnoremap <C-p> :<C-u>Denite file_rec<CR>
 call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git'])
 
 " source search
-nnoremap <C-g> :<C-u>Denite grep:. -mode=normal<CR>
+nnoremap <C-g> :<C-u>Denite grep:::!<CR>
 call denite#custom#var('grep', 'command', ['rg'])
-call denite#custom#var('grep', 'default_opts',
-      \ ['--vimgrep', '--no-heading', '-i'])
+call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading', '-i'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
+
+" buffer search
+nnoremap <C-b> :<C-u>Denite buffer<CR>
+call denite#custom#var('buffer', 'matchers', ['marcher/fuzzy', 'matcher/project_files'])
 
 " next and previous results
 call denite#custom#map('insert','<C-p>','<denite:move_to_previous_line>','noremap')
