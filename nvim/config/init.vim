@@ -139,6 +139,11 @@ augroup NetrwBufferHiddenFix
         \| endif
 augroup END
 
+augroup Terminal
+  autocmd!
+  autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+
 " Section: Functions
 " ------------------
 

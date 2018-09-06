@@ -70,3 +70,6 @@ vmap gx <Plug>(openbrowser-smart-search)
 
 " ALE
 nmap <F3> <Plug>(ale_fix)
+
+" fix mixed indentation
+nmap <F4> mzgg=G`z

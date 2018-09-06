@@ -76,3 +76,15 @@ let g:jsx_ext_required = 0
 
 " ncm2-match-highlight
 " let g:ncm2#match_highlight = 'sans-serif-bold'
+
+" vim-test
+let test#neovim#term_position = 'vertical botright'
+let test#strategy = 'neovim'
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+if has('nvim')
+  tmap <C-o> <C-\><C-n>
+end

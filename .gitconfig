@@ -1,7 +1,16 @@
 [user]
-	name = Vieko Franetovic
-	email = vieko.franetovic@gmail.com
+  name = Vieko Franetovic
+  email = vieko.franetovic@gmail.com
 	signingkey = 13424E310032824A
+
+[credential]
+  helper = osxkeychain
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  program = /usr/local/bin/gpg
 
 [alias]
 
@@ -74,15 +83,15 @@
     declare currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
     declare branch=\"${2:-$currentBranch}\"; \
     if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
-      git fetch origin refs/pull/$1/head:pr/$1 && \
-      git checkout -B $branch && \
-      git rebase $branch pr/$1 && \
-      git checkout -B $branch && \
-      git merge pr/$1 && \
-      git branch -D pr/$1 && \
-      git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
+    git fetch origin refs/pull/$1/head:pr/$1 && \
+    git checkout -B $branch && \
+    git rebase $branch pr/$1 && \
+    git checkout -B $branch && \
+    git merge pr/$1 && \
+    git branch -D pr/$1 && \
+    git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
     fi \
-  }; f"
+    }; f"
 
 [apply]
 
@@ -138,10 +147,6 @@
   changed = green
   untracked = cyan
 
-[commit]
-
-  # https://help.github.com/articles/signing-commits-using-gpg/
-  gpgsign = true
 
 [diff]
 
@@ -199,8 +204,6 @@
   insteadOf = "gist:"
 [filter "lfs"]
   clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
   required = true
-[gpg]
-	program = gpg

@@ -62,6 +62,8 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('morhetz/gruvbox')
   " linting
   call dein#add('w0rp/ale')
+  " testing
+  call dein#add('janko-m/vim-test')
   " language client
   call dein#add('autozimu/LanguageClient-neovim', {
         \ 'rev': 'next',
