@@ -1,0 +1,37 @@
+config:
+  backup: true
+  banner: false
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  link_by_default: false
+  longkey: false
+  workdir: ~/.config/dotdrop
+dotfiles:
+  f_xdefaults:
+    dst: ~/.Xdefaults
+    src: Xdefaults
+  f_xinitrc:
+    dst: ~/.xinitrc
+    src: xinitrc
+  f_xresources:
+    dst: ~/.Xresources
+    src: Xresources
+  f_zlogin:
+    dst: ~/.zlogin
+    src: zlogin
+  f_zshenv:
+    dst: ~/.zshenv
+    src: zshenv
+  f_zshrc:
+    dst: ~/.zshrc
+    src: zshrc
+profiles:
+  pandemonium:
+    dotfiles:
+    - f_xinitrc
+    - f_xresources
+    - f_zlogin
+    - f_zshenv
+    - f_zshrc
+    - f_xdefaults

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+[ -f ~/.scripts/shortcuts.sh ] && ~/.scripts/shortcuts.sh
+
+[ -f ~/.zshrc ] && source ~/.zshrc
+
+# start graphical server if i3 not already running
+if [ "$(tty)" = "/dev/tty1" ]; then
+  pgrep -x i3 || exec startx
+fi
+
+# define vmware screenmodes and pick one
+[ -f ~/.config/xrandr/add_modes.sh ] && ~/.config/xrandr/add_modes.sh
+
+# use wal colors if tty
+wal -Rn
