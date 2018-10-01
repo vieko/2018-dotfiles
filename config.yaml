@@ -6,8 +6,45 @@ config:
   keepdot: false
   link_by_default: false
   longkey: false
+  showdiff: false
   workdir: ~/.config/dotdrop
 dotfiles:
+  d_dunst:
+    dst: ~/.config/dunst
+    src: config/dunst
+  d_feh:
+    dst: ~/.config/feh
+    src: config/feh
+  d_fontconfig:
+    dst: ~/.config/fontconfig
+    src: config/fontconfig
+  d_i3:
+    dst: ~/.config/i3
+    src: config/i3
+  d_nvim:
+    dst: ~/.config/nvim
+    src: config/nvim
+  d_polybar:
+    dst: ~/.config/polybar
+    src: config/polybar
+  d_ranger:
+    dst: ~/.config/ranger
+    src: config/ranger
+  d_wal:
+    dst: ~/.config/wal
+    src: config/wal
+  f_compton.conf:
+    dst: ~/.config/compton.conf
+    src: config/compton.conf
+  f_gitignore:
+    dst: ~/.gitignore
+    src: gitignore
+  f_hushlogin:
+    dst: ~/.hushlogin
+    src: hushlogin
+  f_wall.jpg:
+    dst: ~/.config/wall.jpg
+    src: config/wall.jpg
   f_xdefaults:
     dst: ~/.Xdefaults
     src: Xdefaults
@@ -35,3 +72,15 @@ profiles:
     - f_zshenv
     - f_zshrc
     - f_xdefaults
+    - f_hushlogin
+    - f_gitignore
+    - f_compton.conf
+    - d_dunst
+    - d_fontconfig
+    - d_nvim
+    - d_polybar
+    - d_wal
+    - d_feh
+    - d_i3
+    - d_ranger
+    - f_wall.jpg
