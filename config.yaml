@@ -30,9 +30,24 @@ dotfiles:
   d_ranger:
     dst: ~/.config/ranger
     src: config/ranger
+  d_rofi:
+    dst: ~/.config/rofi
+    src: config/rofi
+  d_slim:
+    dst: ~/.config/slim
+    src: config/slim
+  d_src:
+    dst: ~/.config/nvim/src
+    src: config/nvim/src
   d_wal:
     dst: ~/.config/wal
     src: config/wal
+  f_coc-settings.json:
+    dst: ~/.config/nvim/coc-settings.json
+    src: config/nvim/coc-settings.json
+  f_coc.vim:
+    dst: ~/.config/nvim/src/coc.vim
+    src: config/nvim/src/coc.vim
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
@@ -42,6 +57,9 @@ dotfiles:
   f_hushlogin:
     dst: ~/.hushlogin
     src: hushlogin
+  f_tern-config:
+    dst: ~/.tern-config
+    src: tern-config
   f_wall.jpg:
     dst: ~/.config/wall.jpg
     src: config/wall.jpg
@@ -84,3 +102,9 @@ profiles:
     - d_i3
     - d_ranger
     - f_wall.jpg
+    - d_rofi
+    - f_tern-config
+    - d_slim
+    - f_coc-settings.json
+    - d_src
+    - f_coc.vim

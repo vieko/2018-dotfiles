@@ -1,0 +1,4 @@
+{
+  "coc.preferences.diagnostic.errorSign": "⨯⨯",
+  "coc.preferences.diagnostic.warningSign": "▸▸"
+}
