@@ -39,10 +39,10 @@ inoremap <C-U> <C-G>u<C-U>
 nnoremap <silent> <Leader><CR> :noh<CR>
 
 " move between linting errors
-nmap <silent>[W <Plug>(ale_first)
-nmap <silent>[w <Plug>(ale_previous)
-nmap <silent>]w <Plug>(ale_next)
-nmap <silent>]W <Plug>(ale_last)
+" nmap <silent>[W <Plug>(ale_first)
+" nmap <silent>[w <Plug>(ale_previous)
+" nmap <silent>]w <Plug>(ale_next)
+" nmap <silent>]W <Plug>(ale_last)
 
 " gruvbox overrides for tpope/unimpaired
 nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
@@ -69,7 +69,7 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
 " ALE
-nmap <F3> <Plug>(ale_fix)
+" nmap <F3> <Plug>(ale_fix)
 
 " fix mixed indentation
 nmap <F4> mzgg=G`z

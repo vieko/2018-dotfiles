@@ -9,6 +9,7 @@ source $CONFIG/plugins.vim
 source $CONFIG/initialize.vim
 source $CONFIG/configure.vim
 source $CONFIG/powerline.vim
-source $CONFIG/denite.vim
-source $CONFIG/completion.vim
 source $CONFIG/keybindings.vim
+source $CONFIG/denite.vim
+source $CONFIG/defx.vim
+source $CONFIG/coc.vim

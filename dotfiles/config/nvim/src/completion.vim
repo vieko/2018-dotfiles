@@ -4,7 +4,7 @@
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
-" suppress 'match x  of y', 'only match' and 'patter not found'
+" suppress 'match x  of y', 'only match' and 'pattern not found'
 set shortmess+=c
 
 " slightly fuzzier matcher

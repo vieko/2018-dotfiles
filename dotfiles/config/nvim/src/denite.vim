@@ -23,7 +23,7 @@ call denite#custom#option(
 
 " file search
 nnoremap <C-p> :<C-u>Denite file_rec<CR>
-call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git'])
+call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', '--glob', '!swap/*', '--glob', '!undo/*'])
 
 " source search
 nnoremap <C-g> :<C-u>Denite grep:::!<CR>

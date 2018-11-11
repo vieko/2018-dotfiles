@@ -1,15 +1,5 @@
 " autocmd FileType defx call DefxSettings()
 
-function! DefxOpen(...) abort
-  let l:find_current_file = a:0 > 0
-
-  if !l:find_current_file
-    return execute(printf('Defx %s', getcwd()))
-  endif
-
-  return execute(printf('Defx %s -search=%s', expand('%:p:h'), expand('%:p')))
-endfunction
-
 " function! DefxContextMenu() abort
 "   let l:actions = ['new_file', 'new_directory', 'rename', 'remove', 'print']
 "   let l:selection = confirm('Action?', "&New file\nNew &Folder\n&Rename\n&Delete\n&Print")
@@ -34,15 +24,21 @@ endfunction
 " nnoremap <Leader>hf :call DefxOpen(v:true)<CR>
 " nnoremap <Leader>n :call DefxOpen()<CR>
 
-autocmd FileType defx call s:defx_my_settings() 
-nnoremap <Leader>/ :call DefxOpen()<CR>
+function! DefxOpen(...) abort
+  let l:find_current_file = a:0 > 0
+  if !l:find_current_file
+    return execute(printf('Defx -toggle -split=vertical -winwidth=50 -direction=topleft %s', getcwd()))
+  endif
+  return execute(printf('Defx -toggle -split=vertical -winwidth=50 -direction=topleft %s -search=%s', expand('%:p:h'), expand('%:p')))
+endfunction
+
+nnoremap <silent><Leader>\ :call DefxOpen()<CR>
 
 function! s:defx_my_settings() abort
-  " Define mappings
   nnoremap <silent><buffer><expr> <CR>
-        \ defx#do_action('open')
+        \ defx#do_action('open', 'wincmd w \| drop')
   nnoremap <silent><buffer><expr> l
-        \ defx#do_action('open')
+        \ defx#do_action('open', 'wincmd w \| drop')
   nnoremap <silent><buffer><expr> E
         \ defx#do_action('open', 'vsplit')
   nnoremap <silent><buffer><expr> P
@@ -74,3 +70,5 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> <C-g>
         \ defx#do_action('print')
 endfunction
+
+autocmd FileType defx call s:defx_my_settings() 
