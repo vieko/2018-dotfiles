@@ -34,6 +34,9 @@ dotfiles:
   d_rofi:
     dst: ~/.config/rofi
     src: config/rofi
+  d_scripts:
+    dst: ~/.scripts
+    src: scripts
   d_slim:
     dst: ~/.config/slim
     src: config/slim
@@ -113,3 +116,4 @@ profiles:
     - d_src
     - f_coc.vim
     - f_shortcuts
+    - d_scripts

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# setup virtual screen to 2880x1800x60
+
+xrandr --output Virtual-1 --mode 2880x1800 --dpi 221
