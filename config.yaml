@@ -3,6 +3,7 @@ config:
   banner: false
   create: true
   dotpath: dotfiles
+  ignoreempty: false
   keepdot: false
   link_by_default: false
   longkey: false
@@ -57,6 +58,9 @@ dotfiles:
   f_hushlogin:
     dst: ~/.hushlogin
     src: hushlogin
+  f_shortcuts:
+    dst: ~/.shortcuts
+    src: shortcuts
   f_tern-config:
     dst: ~/.tern-config
     src: tern-config
@@ -108,3 +112,4 @@ profiles:
     - f_coc-settings.json
     - d_src
     - f_coc.vim
+    - f_shortcuts
