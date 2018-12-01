@@ -1,6 +1,4 @@
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" let $NVIM_LOG_FILE='~/.local/share/nvim/log'
-" let $NVIM_PYTHON_LOG_FILE='~/.local/share/nvim/py_log'
 
 " Section: Options
 " ----------------
@@ -114,40 +112,10 @@ highlight MatchParen guibg=#3c3836
 " Section: Commands
 " ---------------------
 
-" == hardmode on startup
-" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-" toggle relative / no relative numbers
 autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
-
-" == jump to last known cursor position
-" autocmd BufReadPost *
-"       \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-"       \   exe "normal g`\"" |
-"       \ endif
-"
-" == emmet on this filetypes
 autocmd FileType html,css,scss,less,twig,javascript.jsx EmmetInstall
-
 autocmd BufEnter,BufRead *.conf setf nginx
-
-" augroup Linting
-"   autocmd!
-"   set updatetime=1000
-"   let g:ale_lint_on_text_changed = 0
-"   autocmd CursorHold * call ale#Lint()
-"   autocmd CursorHoldI * call ale#Lint()
-"   autocmd InsertEnter * call ale#Lint()
-"   autocmd InsertLeave * call ale#Lint()
-" augroup END
-
-augroup NetrwBufferHiddenFix
-  autocmd!
-  autocmd BufWinEnter *
-        \  if &ft != 'netrw'
-        \|     set bufhidden=hide
-        \| endif
-augroup END
 
 augroup Terminal
   autocmd!

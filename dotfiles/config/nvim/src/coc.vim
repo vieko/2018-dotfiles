@@ -3,6 +3,11 @@ set cmdheight=2
 set updatetime=300
 set signcolumn=yes
 
+highlight link CocErrorSign GruvboxRed
+highlight link CocWarningSign GruvboxYellow
+highlight link CocInfoSign GruvboxBlue
+highlight link CocHintSign GruvboxBlue
+
 " use tab to trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -67,10 +72,14 @@ command! -nargs=0 Format :call CocAction('format')
 " use `:Fold` for fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
+let airline#extensions#coc#error_symbol = 'E:'
+let airline#extensions#coc#warning_symbol = 'W:'
+
+" let g:airline#extensions#disable_rtp_load = 1
+" let g:airline_extensions = ['branch', 'coc', 'denite', 'fugitiveline', 'hunks', 'keymap', 'netrw', 'po', 'quickfix', 'tabline', 'term', 'whitespace', 'wordcount']
+
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-let airline#extensions#coc#error_symbol = '⨯⨯:'
-let airline#extensions#coc#warning_symbol = '▸▸:'
 
 " search symbols in current buffer
 nnoremap <silent> <space>o :<C-u>Denite coc-symbols<cr>

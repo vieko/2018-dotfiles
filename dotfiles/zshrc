@@ -1,26 +1,24 @@
 stty -ixon
 HISTSIZE= HISTFILESIZE=
 
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-export ZSH="/home/vieko/.oh-my-zsh"
-
 ZSH_THEME=""
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
   git
   github
+  git-flow-avh
   aws
   npm
   tmux
   pyenv
+  docker
   archlinux
   common-aliases
   last-working-dir
+  colored-man-pages
   zsh-completions
   zsh-autosuggestions
-  colored-man-pages
   zsh-syntax-highlighting
 )
 
@@ -35,18 +33,14 @@ PURE_GIT_DOWN_ARROW=
 
 prompt pure
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 source ~/.shortcuts
 
+alias ssh='TERM=xterm-256color ssh'
 alias vim="nvim"
 alias vi="nvim"
 
+alias scc='/home/vieko/.scc/scc.py'
 alias dotdrop=~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml
+
+[[ -f /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+[[ -f /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
