@@ -1,4 +1,11 @@
 {
+  "coc.preferences.diagnostic.enable": true,
+  "coc.preferences.diagnostic.level": "hint",
+  "coc.preferences.diagnostic.infoSign": "--",
+  "coc.preferences.diagnostic.hintSign": "~~",
+  "coc.preferences.diagnostic.warningSign": "▸▸",
   "coc.preferences.diagnostic.errorSign": "⨯⨯",
-  "coc.preferences.diagnostic.warningSign": "▸▸"
+  "typescript.suggestionActions.enabled": true,
+  "javascript.suggestionActions.enabled": true,
+  "scss.validate": false
 }

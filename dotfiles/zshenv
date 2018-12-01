@@ -4,7 +4,7 @@ export PATH="$PATH:$HOME/.scripts"
 export TERMINAL="st"
 export EDITOR="nvim"
 export BROWSER="linkhandler"
-export TRUEBROWSER="firefox"
+export TRUEBROWSER="google-chrome-stable"
 export AWS_PROFILE='nighthawk'
 
 export GPG_TTY=$(tty)

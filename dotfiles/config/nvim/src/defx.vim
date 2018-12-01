@@ -1,29 +1,3 @@
-" autocmd FileType defx call DefxSettings()
-
-" function! DefxContextMenu() abort
-"   let l:actions = ['new_file', 'new_directory', 'rename', 'remove', 'print']
-"   let l:selection = confirm('Action?', "&New file\nNew &Folder\n&Rename\n&Delete\n&Print")
-"   silent exe 'redraw'
-
-"   return feedkeys(defx#do_action(l:actions[l:selection - 1]))
-" endfunction
-
-" function! DefxSettings() abort
-"   nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
-"   nnoremap <silent><buffer>m :call DefxContextMenu()<CR>
-"   nnoremap <silent><buffer><expr> o defx#do_action('open')
-"   nnoremap <silent><buffer><expr> s defx#do_action('open', 'vsplit')
-"   nnoremap <silent><buffer><expr> R defx#do_action('redraw')
-"   nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
-"   nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
-"   nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-"   nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
-"   nnoremap <silent><buffer> q :call execute("bn\<BAR>bw#")<CR>
-" endfunction
-
-" nnoremap <Leader>hf :call DefxOpen(v:true)<CR>
-" nnoremap <Leader>n :call DefxOpen()<CR>
-
 function! DefxOpen(...) abort
   let l:find_current_file = a:0 > 0
   if !l:find_current_file

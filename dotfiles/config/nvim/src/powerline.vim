@@ -24,7 +24,3 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.notexists=' ⁇'
-
-" tmuxline
-" let g:tmuxline_preset='powerline'
-" let g:airline#extensions#tmuxline#enabled=0
