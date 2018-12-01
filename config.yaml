@@ -117,3 +117,31 @@ profiles:
     - f_coc.vim
     - f_shortcuts
     - d_scripts
+  hollowearth:
+    dotfiles:
+    - f_xinitrc
+    - f_xresources
+    - f_zlogin
+    - f_zshenv
+    - f_zshrc
+    - f_xdefaults
+    - f_hushlogin
+    - f_gitignore
+    - f_compton.conf
+    - d_dunst
+    - d_fontconfig
+    - d_nvim
+    - d_polybar
+    - d_wal
+    - d_feh
+    - d_i3
+    - d_ranger
+    - f_wall.jpg
+    - d_rofi
+    - f_tern-config
+    - d_slim
+    - f_coc-settings.json
+    - d_src
+    - f_coc.vim
+    - f_shortcuts
+    - d_scripts

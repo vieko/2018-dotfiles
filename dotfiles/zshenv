@@ -1,10 +1,11 @@
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ZSH="/home/vieko/.oh-my-zsh"
 export PATH="$PATH:$HOME/.scripts"
-export EDITOR="nvim"
 export TERMINAL="st"
+export EDITOR="nvim"
 export BROWSER="linkhandler"
 export TRUEBROWSER="firefox"
-export READER="zathura"
-export BIB="$HOME/Documents/LaTeX/uni.bib"
+export AWS_PROFILE='nighthawk'
 
 export GPG_TTY=$(tty)
 
@@ -18,3 +19,14 @@ fi
 eval "$(pyenv virtualenv-init -)"
 
 export PATH=~/.npm-global/bin:$PATH
+export PATH=~/.local/bin:$PATH
+
+# fpath=( "$HOME/.zfunctions" $path )
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+# USER_BASE_PATH=$(python -m site --user-base)
+# export PATH=$PATH:$USER_BASE_PATH/bin
