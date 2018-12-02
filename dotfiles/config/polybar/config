@@ -1,5 +1,7 @@
 ; vim:ft=dosini
 
+{{@@ header() @@}}
+
 [colors]
 background = ${xrdb:color0}
 background-alt = #444
@@ -10,7 +12,11 @@ secondary = ${xrdb:color5}
 alert = #bd2c40
 
 [bar/vieko]
+{%@@ if profile == "pandemonium" @@%}
 monitor = ${env:MONITOR:Virtual-1}
+{%@@ elif profile == "hollowearth" @@%}
+monitor = ${env:MONITOR:LVDS-2}
+{%@@ endif @@%}
 width = 100%
 height = 32
 fixed-center = true
@@ -34,13 +40,17 @@ font-0 = monospace:pixelsize=13;3
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=13;1
 
-modules-left = bspwm i3
+modules-left = i3
 modules-center = xwindow
 modules-right = network-guest date
 
 [module/network-guest]
 type = internal/network
+{%@@ if profile == "pandemonium" @@%}
 interface = ens37
+{%@@ elif profile == "hollowearth" @@%}
+interface = wlp3s0
+{%@@ endif @@%}
 label-connected = %local_ip%
 
 [module/network-host]
