@@ -22,6 +22,9 @@ dotfiles:
   d_i3:
     dst: ~/.config/i3
     src: config/i3
+  d_modprobe.d:
+    dst: /etc/modprobe.d
+    src: etc/modprobe.d
   d_nvim:
     dst: ~/.config/nvim
     src: config/nvim
@@ -34,12 +37,18 @@ dotfiles:
   d_rofi:
     dst: ~/.config/rofi
     src: config/rofi
+  d_rules.d:
+    dst: /etc/udev/rules.d
+    src: etc/udev/rules.d
   d_scripts:
     dst: ~/.scripts
     src: scripts
   d_slim:
     dst: ~/.config/slim
     src: config/slim
+  d_system:
+    dst: /etc/systemd/system
+    src: etc/systemd/system
   d_wal:
     dst: ~/.config/wal
     src: config/wal
@@ -52,9 +61,15 @@ dotfiles:
   f_hushlogin:
     dst: ~/.hushlogin
     src: hushlogin
+  f_mbpfan.conf:
+    dst: /etc/mbpfan.conf
+    src: etc/mbpfan.conf
   f_shortcuts:
     dst: ~/.shortcuts
     src: shortcuts
+  f_vconsole.conf:
+    dst: /etc/vconsole.conf
+    src: etc/vconsole.conf
   f_wall.jpg:
     dst: ~/.config/wall.jpg
     src: config/wall.jpg
@@ -97,6 +112,11 @@ profiles:
     - d_slim
     - f_shortcuts
     - d_scripts
+    - d_modprobe.d
+    - d_system
+    - d_rules.d
+    - f_mbpfan.conf
+    - f_vconsole.conf
   pandemonium:
     dotfiles:
     - f_xinitrc
