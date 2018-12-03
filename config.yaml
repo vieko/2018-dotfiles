@@ -34,6 +34,9 @@ dotfiles:
   d_ranger:
     dst: ~/.config/ranger
     src: config/ranger
+  d_redshift:
+    dst: ~/.config/redshift
+    src: config/redshift
   d_rofi:
     dst: ~/.config/rofi
     src: config/rofi
@@ -121,6 +124,7 @@ profiles:
     - f_mbpfan.conf
     - f_vconsole.conf
     - f_xmodmap
+    - d_redshift
   pandemonium:
     dotfiles:
     - f_xinitrc

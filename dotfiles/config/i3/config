@@ -1,7 +1,5 @@
 # vim: filetype=i3
 
-{{@@ header() @@}}
-
 {%@@ if profile == "pandemonium" @@%}
 set $gaps 15
 set $font "monospace:size=13:pixelsize=20"
