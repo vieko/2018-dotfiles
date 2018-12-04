@@ -58,15 +58,30 @@ dotfiles:
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
+  f_cpufreq.conf:
+    dst: /etc/laptop-mode/conf.d/cpufreq.conf
+    src: etc/laptop-mode/conf.d/cpufreq.conf
+  f_cpupower:
+    dst: /etc/default/cpupower
+    src: etc/default/cpupower
   f_gitignore:
     dst: ~/.gitignore
     src: gitignore
   f_hushlogin:
     dst: ~/.hushlogin
     src: hushlogin
+  f_intel_pstate.conf:
+    dst: /etc/laptop-mode/conf.d/intel_pstate.conf
+    src: etc/laptop-mode/conf.d/intel_pstate.conf
   f_mbpfan.conf:
     dst: /etc/mbpfan.conf
     src: etc/mbpfan.conf
+  f_mbpfan.service:
+    dst: /usr/lib/systemd/system/mbpfan.service
+    src: usr/lib/systemd/system/mbpfan.service
+  f_powertop.service:
+    dst: /etc/systemd/system/powertop.service
+    src: etc/systemd/system/powertop.service
   f_shortcuts:
     dst: ~/.shortcuts
     src: shortcuts
@@ -76,6 +91,12 @@ dotfiles:
   f_wall.jpg:
     dst: ~/.config/wall.jpg
     src: config/wall.jpg
+  f_xbindkeysrc:
+    dst: ~/.xbindkeysrc
+    src: xbindkeysrc
+  f_xfluxd.conf:
+    dst: /etc/xfluxd.conf
+    src: etc/xfluxd.conf
   f_xinitrc:
     dst: ~/.xinitrc
     src: xinitrc
@@ -125,6 +146,13 @@ profiles:
     - f_vconsole.conf
     - f_xmodmap
     - d_redshift
+    - f_xfluxd.conf
+    - f_powertop.service
+    - f_intel_pstate.conf
+    - f_cpufreq.conf
+    - f_cpupower
+    - f_mbpfan.service
+    - f_xbindkeysrc
   pandemonium:
     dotfiles:
     - f_xinitrc

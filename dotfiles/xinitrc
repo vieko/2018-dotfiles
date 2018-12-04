@@ -12,7 +12,12 @@ if [ $? -eq 0 ]; then
   export GDK_DPI_SCALE=0.5
 fi
 {%@@ elif profile == "hollowearth" @@%}
+xcalib ~/.colorprofiles/munki.icc
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+if [ `type -P xbindkeys` ]; then
+    # Load custom keyboard key bindings
+    xbindkeys
+fi;
 {%@@ endif @@%}
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
