@@ -19,6 +19,10 @@ set $reboot sudo -A reboot
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 set $hibernate sudo -A systemctl suspend
 
+floating_minimum_size 560 x 350
+floating_maximum_size 840 x 525
+for_window [class="Chromium"] move position center
+
 ## EXTERNAL
 exec_always --no-startup-id wal --theme base16-gruvbox-medium
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
