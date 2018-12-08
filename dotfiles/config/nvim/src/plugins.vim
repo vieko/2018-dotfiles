@@ -16,6 +16,7 @@ if dein#load_state(expand('~/.cache/dein'))
   " call dein#add('Shougo/echodoc.vim')
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/defx.nvim')
+  call dein#add('kristijanhusak/defx-git')
   " syntax
   call dein#add('sheerun/vim-polyglot')
   " interface

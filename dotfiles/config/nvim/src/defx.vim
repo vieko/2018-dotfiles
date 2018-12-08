@@ -1,9 +1,23 @@
+let g:defx_git#indicators = {
+      \ 'Modified'  : '',
+      \ 'Staged'    : '',
+      \ 'Untracked' : '',
+      \ 'Renamed'   : '',
+      \ 'Unmerged'  : '',
+      \ 'Ignored'   : '',
+      \ 'Deleted'   : '',
+      \ 'Unknown'   : ''
+      \ }
+
+nnoremap <buffer><silent> [c <Plug>(defx-git-prev)
+nnoremap <buffer><silent> ]c <Plug>(defx-git-next)
+
 function! DefxOpen(...) abort
   let l:find_current_file = a:0 > 0
   if !l:find_current_file
-    return execute(printf('Defx -toggle -split=vertical -winwidth=50 -direction=topleft %s', getcwd()))
+    return execute(printf('Defx -toggle -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft %s', getcwd()))
   endif
-  return execute(printf('Defx -toggle -split=vertical -winwidth=50 -direction=topleft %s -search=%s', expand('%:p:h'), expand('%:p')))
+  return execute(printf('Defx -toggle -columns=git:mark:filename:type -split=vertical -winwidth=50 -direction=topleft %s -search=%s', expand('%:p:h'), expand('%:p')))
 endfunction
 
 nnoremap <silent><Leader>\ :call DefxOpen()<CR>
@@ -43,6 +57,12 @@ function! s:defx_my_settings() abort
         \ defx#do_action('redraw')
   nnoremap <silent><buffer><expr> <C-g>
         \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> c
+        \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> p
+        \ defx#do_action('paste')
 endfunction
 
 autocmd FileType defx call s:defx_my_settings() 
