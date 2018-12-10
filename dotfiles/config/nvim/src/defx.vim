@@ -49,6 +49,8 @@ function! s:defx_my_settings() abort
         \ defx#do_action('toggle_select') . 'j'
   nnoremap <silent><buffer><expr> *
         \ defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> i
+        \ defx#do_action('toggle_ignored_files')
   nnoremap <silent><buffer><expr> j
         \ line('.') == line('$') ? 'gg' : 'j'
   nnoremap <silent><buffer><expr> k
