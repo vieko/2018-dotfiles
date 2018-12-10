@@ -55,6 +55,9 @@ dotfiles:
   d_wal:
     dst: ~/.config/wal
     src: config/wal
+  f_chrome-flags.conf:
+    dst: ~/.config/chrome-flags.conf
+    src: config/chrome-flags.conf
   f_coc-settings.json:
     dst: ~/.config/nvim/coc-settings.json
     src: config/nvim/coc-settings.json
@@ -186,3 +189,4 @@ profiles:
     - d_src
     - f_coc-settings.json
     - f_init.vim
+    - f_chrome-flags.conf
