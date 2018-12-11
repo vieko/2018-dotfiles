@@ -114,8 +114,9 @@ highlight MatchParen guibg=#3c3836
 
 autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
-autocmd FileType html,css,scss,less,twig,javascript.jsx EmmetInstall
+" autocmd FileType html,css,scss,less,twig,javascript.jsx EmmetInstall
 autocmd BufEnter,BufRead *.conf setf nginx
+autocmd BufEnter,BufRead *.prisma setf graphql
 
 augroup Terminal
   autocmd!
