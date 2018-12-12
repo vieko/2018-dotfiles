@@ -28,7 +28,6 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('andymass/vim-matchup')
   call dein#add('machakann/vim-highlightedyank')
   call dein#add('justinmk/vim-sneak')
-  call dein#add('junegunn/rainbow_parentheses.vim')
   " editor
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-surround')

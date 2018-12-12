@@ -25,9 +25,6 @@ let g:sneak#s_next=1
 let g:matchup_transmute_enabled=0
 let g:matchup_matchparen_deferred=1
 
-" rainbow-parentheses
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-
 " neopairs
 " let g:neopairs#enable=1
 
