@@ -13,6 +13,7 @@ plugins=(
   tmux
   pyenv
   docker
+  docker-compose
   archlinux
   common-aliases
   last-working-dir

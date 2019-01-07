@@ -5,7 +5,7 @@ let g:python3_host_prog = '/home/vieko/.pyenv/versions/py36/bin/python'
 
 let $CONFIG = '$HOME/.config/nvim/src'
 
-source $CONFIG/plugins.vim
+source $CONFIG/plugged.vim
 source $CONFIG/initialize.vim
 source $CONFIG/configure.vim
 source $CONFIG/powerline.vim

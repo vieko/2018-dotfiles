@@ -9,7 +9,7 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('wsdjeg/dein-ui.vim')
   " autocomplete
   call dein#add('Shougo/neco-vim')
-  call dein#add('neoclide/coc.nvim', {'rev': 'v0.0.34', 'build': 'npm install'})
+  call dein#add('neoclide/coc.nvim', {'rev': 'v0.0.45', 'build': 'npm install'})
   " dark power
   " call dein#add('Shougo/context_filetype.vim')
   " call dein#add('Shougo/neopairs.vim')

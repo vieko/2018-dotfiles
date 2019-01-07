@@ -1,0 +1,35 @@
+" Section: Plugins
+" ----------------
+call plug#begin('~/.local/share/nvim/plugged')
+" autocomplete
+Plug 'shougo/neco-vim'
+Plug 'neoclide/coc.nvim', {'tag': 'v0.0.34', 'do': { -> coc#util#install()}}
+" dark power
+Plug 'shougo/denite.nvim'
+Plug 'neoclide/denite-extra'
+Plug 'shougo/defx.nvim'
+Plug 'kristijanhusak/defx-git'
+" syntax
+Plug 'sheerun/vim-polyglot'
+" interface
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'valloric/matchtagalways'
+Plug 'andymass/vim-matchup'
+Plug 'machakann/vim-highlightedyank'
+Plug 'justinmk/vim-sneak'
+" editor
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'andrewradev/splitjoin.vim'
+Plug 'godlygeek/tabular'
+" version control
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+" themes
+Plug 'morhetz/gruvbox'
+call plug#end()

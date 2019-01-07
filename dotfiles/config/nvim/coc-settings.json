@@ -5,7 +5,9 @@
   "coc.preferences.diagnostic.hintSign": "~~",
   "coc.preferences.diagnostic.warningSign": "▸▸",
   "coc.preferences.diagnostic.errorSign": "⨯⨯",
+  "tsserver.trace.server": "verbose",
   "typescript.suggestionActions.enabled": true,
   "javascript.suggestionActions.enabled": true,
-  "scss.validate": false
+  "scss.validate": false,
+  "emmet.includeLanguages": {"twig": "html"}
 }
