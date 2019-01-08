@@ -54,7 +54,7 @@ endfunction
 autocmd CursorHoldI * silent! call CocActionAsync('showSignatureHelp')
 
 " highlight
-autocmd CursorHold * silent call CocRequestAsync('highlight')
+" autocmd CursorHold * silent call CocRequestAsync('highlight')
 
 " remap rename current word
 nmap <leader>rn <Plug>(coc-rename)

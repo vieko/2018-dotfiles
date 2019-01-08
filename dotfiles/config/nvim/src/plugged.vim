@@ -3,7 +3,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 " autocomplete
 Plug 'Shougo/neco-vim'
-Plug 'neoclide/coc.nvim', {'tag': 'v0.0.34', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " dark power
 Plug 'Shougo/denite.nvim'
 Plug 'neoclide/denite-extra'
@@ -15,7 +15,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'Valloric/matchtagalways'
+Plug 'Valloric/MatchTagAlways'
 Plug 'andymass/vim-matchup'
 Plug 'machakann/vim-highlightedyank'
 Plug 'justinmk/vim-sneak'
