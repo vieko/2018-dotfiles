@@ -1,6 +1,7 @@
 set hidden
 set cmdheight=2
 set updatetime=300
+set shortmess+=c
 set signcolumn=yes
 
 highlight link CocErrorSign GruvboxRed
@@ -22,9 +23,6 @@ endfunction
 
 " use <c-space> to trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
-
-" use <C-x><C-o> to complete word, emoji and include sources
-imap <silent> <C-x><C-o> <Plug>(coc-complete-custom)
 
 " use <cr> to confirm completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -54,7 +52,7 @@ endfunction
 autocmd CursorHoldI * silent! call CocActionAsync('showSignatureHelp')
 
 " highlight
-" autocmd CursorHold * silent call CocRequestAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " remap rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -63,8 +61,18 @@ nmap <leader>rn <Plug>(coc-rename)
 vmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 
+augroup COC
+  autocmd!
+  " setup formatexpr speficied filetypes
+  autocmd FileType javascript,json setl formatexpr=CocAction('formatSelected')
+  " update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
 " remap do codeAction of current line
 nmap <leader>ac <Plug>(coc-codeaction)
+" fix autofix problem of current line
+nmap <leader>qf <Plug>(coc-fix-current)
 
 " use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -81,15 +89,19 @@ let airline#extensions#coc#warning_symbol = 'W:'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
-" search symbols in current buffer
-nnoremap <silent> <space>o :<C-u>Denite coc-symbols<cr>
-" search symbols in current workspace
-nnoremap <silent> <space>t :<C-u>Denite coc-workspace<cr>
-" show diagnostics in current workspace
-nnoremap <silent> <space>a :<C-u>Denite coc-diagnostic<cr>
+" show diagnostics
+nnoremap <silent> <space>a :<C-u>CocList diagnostics<cr>
+" manage extensions
+nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
 " show available commands
-nnoremap <silent> <space>c :<C-u>Denite coc-command<cr>
-" show available services
-nnoremap <silent> <space>s :<C-u>Denite coc-service<cr>
-" show links in current buffer
-nnoremap <silent> <space>l :<C-u>Denite coc-link<cr>
+nnoremap <silent> <space>c :<C-u>CocList commands<cr>
+" search symbols in current buffer
+nnoremap <silent> <space>o :<C-u>CocList outline<cr>
+" show workspace symbols
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" do default action for next item
+nnoremap <silent> <space>j :<C-u>CocNext<cr>
+" do default action for previous item
+nnoremap <silent> <space>k :<C-u>CocPrev<cr>
+" resume latest coc list
+nnoremap <silent> <space>p :<C-u>CocListResume<cr>

@@ -9,5 +9,6 @@
   "typescript.suggestionActions.enabled": true,
   "javascript.suggestionActions.enabled": true,
   "scss.validate": false,
-  "emmet.includeLanguages": {"twig": "html"}
+  "emmet.includeLanguages": {"twig": "html"},
+  "highlight.colors.enable": false
 }
