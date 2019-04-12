@@ -1,0 +1,196 @@
+config:
+  backup: true
+  banner: false
+  create: true
+  dotpath: dotfiles
+  ignoreempty: false
+  keepdot: false
+  link_by_default: false
+  longkey: false
+  showdiff: false
+  workdir: ~/.config/dotdrop
+dotfiles:
+  d_doom.d:
+    dst: ~/.doom.d
+    src: doom.d
+  d_dunst:
+    dst: ~/.config/dunst
+    src: config/dunst
+  d_feh:
+    dst: ~/.config/feh
+    src: config/feh
+  d_fontconfig:
+    dst: ~/.config/fontconfig
+    src: config/fontconfig
+  d_i3:
+    dst: ~/.config/i3
+    src: config/i3
+  d_modprobe.d:
+    dst: /etc/modprobe.d
+    src: etc/modprobe.d
+  d_polybar:
+    dst: ~/.config/polybar
+    src: config/polybar
+  d_ranger:
+    dst: ~/.config/ranger
+    src: config/ranger
+  d_redshift:
+    dst: ~/.config/redshift
+    src: config/redshift
+  d_rofi:
+    dst: ~/.config/rofi
+    src: config/rofi
+  d_rules.d:
+    dst: /etc/udev/rules.d
+    src: etc/udev/rules.d
+  d_scripts:
+    dst: ~/.scripts
+    src: scripts
+  d_slim:
+    dst: ~/.config/slim
+    src: config/slim
+  d_src:
+    dst: ~/.config/nvim/src
+    src: config/nvim/src
+  d_system:
+    dst: /etc/systemd/system
+    src: etc/systemd/system
+  d_wal:
+    dst: ~/.config/wal
+    src: config/wal
+  f_chrome-flags.conf:
+    dst: ~/.config/chrome-flags.conf
+    src: config/chrome-flags.conf
+  f_coc-settings.json:
+    dst: ~/.config/nvim/coc-settings.json
+    src: config/nvim/coc-settings.json
+  f_compton.conf:
+    dst: ~/.config/compton.conf
+    src: config/compton.conf
+  f_cpufreq.conf:
+    dst: /etc/laptop-mode/conf.d/cpufreq.conf
+    src: etc/laptop-mode/conf.d/cpufreq.conf
+  f_cpupower:
+    dst: /etc/default/cpupower
+    src: etc/default/cpupower
+  f_gitignore:
+    dst: ~/.gitignore
+    src: gitignore
+  f_hushlogin:
+    dst: ~/.hushlogin
+    src: hushlogin
+  f_init.vim:
+    dst: ~/.config/nvim/init.vim
+    src: config/nvim/init.vim
+  f_intel_pstate.conf:
+    dst: /etc/laptop-mode/conf.d/intel_pstate.conf
+    src: etc/laptop-mode/conf.d/intel_pstate.conf
+  f_mbpfan.conf:
+    dst: /etc/mbpfan.conf
+    src: etc/mbpfan.conf
+  f_mbpfan.service:
+    dst: /usr/lib/systemd/system/mbpfan.service
+    src: usr/lib/systemd/system/mbpfan.service
+  f_powertop.service:
+    dst: /etc/systemd/system/powertop.service
+    src: etc/systemd/system/powertop.service
+  f_shortcuts:
+    dst: ~/.shortcuts
+    src: shortcuts
+  f_vconsole.conf:
+    dst: /etc/vconsole.conf
+    src: etc/vconsole.conf
+  f_wall.jpg:
+    dst: ~/.config/wall.jpg
+    src: config/wall.jpg
+  f_xbindkeysrc:
+    dst: ~/.xbindkeysrc
+    src: xbindkeysrc
+  f_xfluxd.conf:
+    dst: /etc/xfluxd.conf
+    src: etc/xfluxd.conf
+  f_xinitrc:
+    dst: ~/.xinitrc
+    src: xinitrc
+  f_xmodmap:
+    dst: ~/.Xmodmap
+    src: Xmodmap
+  f_xresources:
+    dst: ~/.Xresources
+    src: Xresources
+  f_zlogin:
+    dst: ~/.zlogin
+    src: zlogin
+  f_zshenv:
+    dst: ~/.zshenv
+    src: zshenv
+  f_zshrc:
+    dst: ~/.zshrc
+    src: zshrc
+profiles:
+  hollowearth:
+    dotfiles:
+    - f_xinitrc
+    - f_xresources
+    - f_zlogin
+    - f_zshenv
+    - f_zshrc
+    - f_hushlogin
+    - f_gitignore
+    - f_compton.conf
+    - d_dunst
+    - d_fontconfig
+    - d_src
+    - f_coc-settings.json
+    - f_init.vim
+    - d_polybar
+    - d_wal
+    - d_feh
+    - d_i3
+    - d_ranger
+    - f_wall.jpg
+    - d_rofi
+    - d_slim
+    - f_shortcuts
+    - d_scripts
+    - d_modprobe.d
+    - d_system
+    - d_rules.d
+    - f_mbpfan.conf
+    - f_vconsole.conf
+    - f_xmodmap
+    - d_redshift
+    - f_xfluxd.conf
+    - f_powertop.service
+    - f_intel_pstate.conf
+    - f_cpufreq.conf
+    - f_cpupower
+    - f_mbpfan.service
+    - f_xbindkeysrc
+  pandemonium:
+    dotfiles:
+    - f_xinitrc
+    - f_xresources
+    - f_zlogin
+    - f_zshenv
+    - f_zshrc
+    - f_hushlogin
+    - f_gitignore
+    - f_compton.conf
+    - d_dunst
+    - d_fontconfig
+    - d_polybar
+    - d_wal
+    - d_feh
+    - d_i3
+    - d_ranger
+    - f_wall.jpg
+    - d_rofi
+    - d_slim
+    - f_shortcuts
+    - d_scripts
+    - d_src
+    - f_coc-settings.json
+    - f_init.vim
+    - f_chrome-flags.conf
+    - d_doom.d

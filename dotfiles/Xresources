@@ -1,0 +1,14 @@
+{{@@ header() @@}}
+
+{%@@ if profile == "pandemonium" @@%}
+Xft.dpi: 219
+{%@@ elif profile == "hollowearth" @@%}
+Xft.dpi: 129
+{%@@ endif @@%}
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+Xcursor.size: 32

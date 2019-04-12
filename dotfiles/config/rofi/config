@@ -1,0 +1,5 @@
+rofi.lines:             6
+rofi.hide-scrollbar:    true
+rofi.width:             30
+rofi.font:              mono 18 
+rofi.modi:              window,run,ssh

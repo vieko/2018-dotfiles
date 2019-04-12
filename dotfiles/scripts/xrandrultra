@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# setup virtual screen to 4096x2304x60
+
+xrandr --output Virtual-1 --mode 4096x2304 --dpi 219

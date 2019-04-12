@@ -1,0 +1,27 @@
+xset r rate 270 30
+
+{%@@ if profile == "pandemonium" @@%}
+xrandr | grep 'Virtual-1' | grep ' connected'
+if [ $? -eq 0 ]; then
+  xrandr --newmode "4096x2304"  813.00  4096 4440 4888 5680  2304 2307 2312 2386 -hsync +vsync
+  xrandr --addmode Virtual-1 4096x2304
+  xrandr --newmode "2880x1800"  442.00  2880 3104 3416 3952  1800 1803 1809 1865 -hsync +vsync
+  xrandr --addmode Virtual-1 2880x1800
+  xrandr --output Virtual-1 --mode 2880x1800 --dpi 221
+  export GDK_SCALE=2
+  export GDK_DPI_SCALE=0.5
+fi
+{%@@ elif profile == "hollowearth" @@%}
+xcalib ~/.colorprofiles/munki.icc
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+if [ `type -P xbindkeys` ]; then
+    # Load custom keyboard key bindings
+    xbindkeys
+fi;
+{%@@ endif @@%}
+
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+xrdb -merge ~/.Xresources
+
+exec i3

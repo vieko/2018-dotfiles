@@ -1,0 +1,13 @@
+#!/bin/sh
+
+[ -f ~/.scripts/shortcuts.sh ] && ~/.scripts/shortcuts.sh
+
+[ -f ~/.zshrc ] && source ~/.zshrc
+
+# start graphical server if i3 not already running
+if [ "$(tty)" = "/dev/tty1" ]; then
+  pgrep -x i3 || exec startx
+fi
+
+# use wal colors if tty
+wal -Rn

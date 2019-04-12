@@ -1,0 +1,32 @@
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ZSH="/home/vieko/.oh-my-zsh"
+export PATH="$PATH:$HOME/.scripts"
+export TERMINAL="st"
+export EDITOR="nvim"
+export BROWSER="linkhandler"
+export TRUEBROWSER="google-chrome-stable"
+export AWS_PROFILE='nighthawk'
+
+export GPG_TTY=$(tty)
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init -)"
+fi
+
+eval "$(pyenv virtualenv-init -)"
+
+export PATH=~/.npm-global/bin:$PATH
+export PATH=~/.local/bin:$PATH
+
+# fpath=( "$HOME/.zfunctions" $path )
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+# USER_BASE_PATH=$(python -m site --user-base)
+# export PATH=$PATH:$USER_BASE_PATH/bin

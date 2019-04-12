@@ -1,0 +1,47 @@
+stty -ixon
+HISTSIZE= HISTFILESIZE=
+
+ZSH_THEME=""
+COMPLETION_WAITING_DOTS="true"
+
+plugins=(
+  git
+  github
+  git-flow-avh
+  aws
+  npm
+  tmux
+  pyenv
+  docker
+  docker-compose
+  archlinux
+  common-aliases
+  last-working-dir
+  colored-man-pages
+  zsh-completions
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+autoload -U compinit; compinit
+autoload -U promptinit; promptinit
+
+PURE_PROMPT_SYMBOL=⚡
+PURE_GIT_UP_ARROW=
+PURE_GIT_DOWN_ARROW=
+
+prompt pure
+
+source ~/.shortcuts
+
+alias ssh='TERM=xterm-256color ssh'
+alias vim="nvim"
+alias vi="nvim"
+
+alias scc='/home/vieko/.scc/scc.py'
+alias dotdrop=~/dotfiles/dotdrop.sh --cfg=~/dotfiles/config.yaml
+
+[[ -f /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+[[ -f /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/vieko/.npm-global/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

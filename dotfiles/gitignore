@@ -1,0 +1,91 @@
+# home
+Documents/*
+Downloads/*
+.Xauthority
+.Xresources
+.bash_history
+.bash_logout
+.calcurse/
+.config/configstore/
+.config/dconf/
+.config/mpd/
+.config/pulse/
+.ssh/
+.esd_auth
+.fehbg
+.gitconfig
+.keychain/
+.local/
+.mozilla/
+.npm/
+.pacupgrnum
+.pyenv/
+.python_history
+.recordingicon
+.viminfo
+.weatherreport
+
+# dotifles
+.extra
+.config/nvim/backup/
+.config/nvim/swap/
+.config/nvim/undo/
+.zcompdump*
+.zsh_history
+
+# compiled python files
+*.pyc
+
+# doc files
+_gh_pages
+_site
+.ruby-version
+
+# typical
+.netrwhist
+*.diff
+*.err
+*.log
+*.orig
+*.rej
+*.swo
+*.swp
+*.vi
+*.zip
+*~
+
+# OS and editors
+._*
+.cache
+.DS_Store
+.idea
+.project
+.settings
+.tmproj
+*.esproj
+*.sublime-project
+*.sublime-workspace
+nbproject
+Thumbs.db
+Desktop.ini
+
+# external drives
+.Spotlight-V100
+.Trashes
+
+# komodo
+.komodotools
+*.komodoproject
+
+# grunt validation
+validation-report.json
+validation-status.json
+
+# folders
+bower_components
+node_modules
+
+# ruby rails
+config/initializers/carrierwave.rb
+app/uploaders/application_uploader.rb
+vendors/rich_cms
